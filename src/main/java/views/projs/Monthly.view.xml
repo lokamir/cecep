@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dataTypeformCondition">
+      <PropertyDef name="beginDate">
+        <Property name="label">开始日期</Property>
+        <Property name="displayFormat">Y年m月d日</Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+      <PropertyDef name="endDate">
+        <Property name="label">结束日期</Property>
+        <Property name="displayFormat">Y年m月d日</Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+      <PropertyDef name="deptid">
+        <Property name="label">水厂名称</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+        </Property>
+        <Property name="readOnly">true</Property>
+        <Property name="defaultValue">00101</Property>
+      </PropertyDef>
+      <PropertyDef name="specimen">
+        <Property name="dataType">String</Property>
+        <Property name="label">样品名称</Property>
+      </PropertyDef>
+      <PropertyDef name="biscompany">
+        <Property name="label">接管企业</Property>
+        <Property name="dataType">dataTypeBiscompany</Property>
+      </PropertyDef>
+      <PropertyDef name="process">
+        <Property name="label">工艺段</Property>
+        <Property name="dataType">dataTypeProcess</Property>
+      </PropertyDef>
+      <PropertyDef name="date">
+        <Property name="dataType">Date</Property>
+        <Property name="displayFormat">Y年m月</Property>
+        <Property name="label">日期</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="title">报表</Property>
+    <AutoForm id="formCondition">
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">dataTypeformCondition</Property>
+      <AutoFormElement>
+        <Property name="name">date</Property>
+        <Property name="property">date</Property>
+        <Property name="trigger">defaultYearMonthDropDown</Property>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">deptid</Property>
+        <Property name="property">deptid</Property>
+      </AutoFormElement>
+      <Button>
+        <ClientEvent name="onClick">var param = view.get(&quot;#formCondition.entity&quot;);&#xD;
+var deptid = param.get(&quot;deptid&quot;);&#xD;
+var d = param.get(&quot;date&quot;);&#xD;
+var date = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()  ;&#xD;
+var subViewHolderExport = view.get(&quot;#subViewHolderExport&quot;);&#xD;
+subViewHolderExport.set(&quot;path&quot;,&quot;./Export_Monthly.jsp?deptid=&quot;+deptid+&quot;&amp;date=&quot;+date);&#xD;
+</ClientEvent>
+        <Property name="caption">预览</Property>
+      </Button>
+    </AutoForm>
+    <IFrame id="subViewHolderExport"/>
+  </View>
+</ViewConfig>

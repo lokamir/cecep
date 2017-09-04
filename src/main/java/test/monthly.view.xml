@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dataTypeOperated" parent="global:dataTypeOperated">
+      <PropertyDef name="operatedcompany">
+        <Property name="dataType">int</Property>
+        <Property name="label">污水厂名称</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapAttach&quot;).getResult()}</Property>
+        </Property>
+        <Property name="defaultValue">1</Property>
+      </PropertyDef>
+      <PropertyDef name="operateddate">
+        <Property name="mapping">
+          <Property name="mapValues"> ${util.getToday()}</Property>
+        </Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+      <PropertyDef name="1">
+        <Property name="dataType">dataTypeAnalysisIn</Property>
+      </PropertyDef>
+      <PropertyDef name="2">
+        <Property name="dataType">dataTypeAnalysisIn</Property>
+      </PropertyDef>
+      <PropertyDef name="3">
+        <Property name="dataType">dataTypeAnalysisIn</Property>
+      </PropertyDef>
+      <PropertyDef name="4">
+        <Property name="dataType">dataTypeAnalysisIn</Property>
+      </PropertyDef>
+      <PropertyDef name="5">
+        <Property name="dataType">dataTypeAnalysisIn</Property>
+      </PropertyDef>
+      <PropertyDef name="6">
+        <Property name="dataType">dataTypeAnalysisIn</Property>
+      </PropertyDef>
+      <Reference name="analysisInSet">
+        <Property name="dataType">[dataTypeAnalysisIn]</Property>
+        <Property name="dataProvider">analysisInDao#loadAnalysisIn</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+      <Reference name="analysisOutSet">
+        <Property name="dataType">[dataTypeAnalysisOut]</Property>
+        <Property name="dataProvider">analysisOutDao#loadAnalysisOut</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+      <Reference name="analysisElseSet">
+        <Property name="dataType">[dataTypeAnalysisElse]</Property>
+        <Property name="dataProvider">analysisElseDao#loadAnalysisElse</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+    </DataType>
+    <DataType name="dataTypeAnalysisIn" parent="global:dataTypeAnalysisIn">
+      <Property name="defaultDisplayProperty">analysiscod</Property>
+      <PropertyDef name="process">
+        <Property name="dataType">dataTypeProcess</Property>
+        <Property name="label">工艺段名称</Property>
+      </PropertyDef>
+      <PropertyDef name="operated">
+        <Property name="dataType">dataTypeOperated</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeAnalysisOut" parent="global:dataTypeAnalysisOut">
+      <PropertyDef name="biscompany">
+        <Property name="dataType">dataTypeBiscompany</Property>
+        <Property name="label">接管企业名称</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeAnalysisElse" parent="global:dataTypeAnalysisElse"/>
+    <DataType name="dataTypeProcess" parent="global:dataTypeProcess">
+      <Property name="defaultDisplayProperty">processname</Property>
+      <Reference name="analysisInSet">
+        <Property name="dataType">[dataTypeAnalysisIn]</Property>
+        <Property name="dataProvider">analysisInDao#loadAnalysisIn</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+    </DataType>
+    <DataType name="dataTypeBiscompany" parent="global:dataTypeBiscompany">
+      <Reference name="analysisOutSet">
+        <Property name="dataType">[dataTypeAnalysisOut]</Property>
+      </Reference>
+    </DataType>
+    <DataType name="dataTypeCriteria">
+      <PropertyDef name="beginDate">
+        <Property name="label">开始时间</Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+      <PropertyDef name="endDate">
+        <Property name="label">结束时间</Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <DataSet id="dataSetOperated">
+      <Property name="dataProvider">operatedDao#loadOperatedForPage</Property>
+      <Property name="dataType">[dataTypeOperated]</Property>
+      <Property name="pageSize">31</Property>
+      <Property name="readOnly">true</Property>
+    </DataSet>
+    <AutoForm id="criteria">
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">dataTypeCriteria</Property>
+      <Property name="cols">*,*,*</Property>
+      <AutoFormElement>
+        <Property name="name">beginDate</Property>
+        <Property name="property">beginDate</Property>
+        <Editor>
+          <TextEditor id="beginDate"/>
+        </Editor>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">endDate</Property>
+        <Property name="property">endDate</Property>
+        <Editor>
+          <TextEditor id="endDate"/>
+        </Editor>
+      </AutoFormElement>
+      <Button id="toolBarButtonExport">
+        <Property name="caption">导出</Property>
+      </Button>
+    </AutoForm>
+    <DataGrid id="dataGridOperated">
+      <Property name="dataSet">dataSetOperated</Property>
+      <Property name="showFooter">true</Property>
+      <Property name="showHeader">true</Property>
+      <DataColumn name="operatedcompany">
+        <Property name="property">operatedcompany</Property>
+      </DataColumn>
+      <DataColumn name="operateddate">
+        <Property name="property">operateddate</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">operatedinflow</Property>
+        <Property name="name">operatedinflow</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">operatedoutflow</Property>
+        <Property name="name">operatedoutflow</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">operatedpower</Property>
+        <Property name="name">operatedpower</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">1.analysiscod</Property>
+        <Property name="name">1.analysiscod</Property>
+        <Property name="caption">进水COD</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">5.analysiscod</Property>
+        <Property name="name">5.analysiscod</Property>
+        <Property name="caption">出水COD</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">1.analysisph</Property>
+        <Property name="name">1.analysisph</Property>
+        <Property name="caption">进水PH</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">5.analysisph</Property>
+        <Property name="name">5.analysisph</Property>
+        <Property name="caption">出水PH</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">1.analysisnh</Property>
+        <Property name="name">1.analysisnh</Property>
+        <Property name="caption">进水氨氮</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">5.analysisnh</Property>
+        <Property name="name">5.analysisnh</Property>
+        <Property name="caption">出水氨氮</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">1.analysistn</Property>
+        <Property name="name">1.analysistn</Property>
+        <Property name="caption">进水总氮</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">5.analysistn</Property>
+        <Property name="name">5.analysistn</Property>
+        <Property name="caption">出水总氮</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">1.analysistp</Property>
+        <Property name="name">1.analysistp</Property>
+        <Property name="caption">进水总磷</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">5.analysistp</Property>
+        <Property name="name">5.analysistp</Property>
+        <Property name="caption">出水总磷</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">6.process.processid</Property>
+        <Property name="name">6.process.processid</Property>
+        <Property name="caption">出水总磷</Property>
+        <Property name="visible">false</Property>
+      </DataColumn>
+    </DataGrid>
+  </View>
+</ViewConfig>

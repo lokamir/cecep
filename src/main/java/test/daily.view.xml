@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dataTypeOperated" parent="global:dataTypeOperated">
+      <Reference name="analysisInSet">
+        <Property name="dataType">[dataTypeAnalysisIn]</Property>
+        <Property name="dataProvider">analysisInDao#loadAnalysisIn</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+      <Reference name="analysisOutSet">
+        <Property name="dataType">[dataTypeAnalysisOut]</Property>
+        <Property name="dataProvider">analysisOutDao#loadAnalysisOut</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+      <Reference name="analysisElseSet">
+        <Property name="dataType">[dataTypeAnalysisElse]</Property>
+        <Property name="dataProvider">analysisElseDao#loadAnalysisElse</Property>
+        <Property name="parameter">$${this.operatedid}</Property>
+      </Reference>
+      <PropertyDef name="operatedcompany">
+        <Property name="dataType">int</Property>
+        <Property name="label">污水厂名称</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapAttach&quot;).getResult()}</Property>
+        </Property>
+        <Property name="defaultValue">1</Property>
+      </PropertyDef>
+      <PropertyDef name="operateddate">
+        <Property name="mapping">
+          <Property name="mapValues"> ${util.getToday()}</Property>
+        </Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeAnalysisIn" parent="global:dataTypeAnalysisIn">
+      <PropertyDef name="process">
+        <Property name="dataType">dataTypeProcess</Property>
+        <Property name="label">工艺段名称</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeAnalysisOut" parent="global:dataTypeAnalysisOut">
+      <PropertyDef name="biscompany">
+        <Property name="dataType">dataTypeBiscompany</Property>
+        <Property name="label">接管企业名称</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeAnalysisElse" parent="global:dataTypeAnalysisElse"/>
+    <DataType name="dataTypeProcess" parent="global:dataTypeProcess">
+      <Property name="defaultDisplayProperty">processname</Property>
+      <Reference name="analysisInSet">
+        <Property name="dataType">[dataTypeAnalysisIn]</Property>
+      </Reference>
+    </DataType>
+    <DataType name="dataTypeBiscompany" parent="global:dataTypeBiscompany">
+      <Property name="defaultDisplayProperty">biscompanyname</Property>
+      <Reference name="analysisOutSet">
+        <Property name="dataType">[dataTypeAnalysisOut]</Property>
+      </Reference>
+    </DataType>
+  </Model>
+  <View>
+    <DataSet id="dataSetOperated">
+      <Property name="dataProvider">operatedDao#loadOperatedForPage</Property>
+      <Property name="dataType">[dataTypeOperated]</Property>
+      <Property name="pageSize">31</Property>
+    </DataSet>
+    <Container id="containerOperated">
+      <Property name="width">100%</Property>
+      <Property name="height">100%</Property>
+      <ToolBar>
+        <DataPilot id="dataPilotOperated">
+          <Property name="itemCodes">pages</Property>
+          <Property name="dataSet">dataSetOperated</Property>
+        </DataPilot>
+        <ToolBarButton id="toolBarButtonNew">
+          <Property name="caption">新增</Property>
+        </ToolBarButton>
+        <ToolBarButton id="toolBarButtonEditor">
+          <Property name="caption">编辑</Property>
+        </ToolBarButton>
+        <ToolBarButton id="toolBarButtonExport">
+          <Property name="caption">导出</Property>
+          <Property name="hideMode">display</Property>
+        </ToolBarButton>
+      </ToolBar>
+      <DataGrid id="dataGridOperated">
+        <Property name="dataSet">dataSetOperated</Property>
+        <Property name="readOnly">true</Property>
+        <DataColumn name="operateddate">
+          <Property name="property">operateddate</Property>
+          <Property name="width">100</Property>
+        </DataColumn>
+        <DataColumn name="operatedcompany">
+          <Property name="property">operatedcompany</Property>
+          <Property name="width">120</Property>
+        </DataColumn>
+        <DataColumn name="operatedinflow">
+          <Property name="property">operatedinflow</Property>
+        </DataColumn>
+        <DataColumn name="operatedoutflow">
+          <Property name="property">operatedoutflow</Property>
+        </DataColumn>
+        <DataColumn name="operatedpower">
+          <Property name="property">operatedpower</Property>
+        </DataColumn>
+        <DataColumn name="operatedpacAmount">
+          <Property name="property">operatedpacAmount</Property>
+        </DataColumn>
+        <DataColumn name="operatedpamkationAmount">
+          <Property name="property">operatedpamkationAmount</Property>
+        </DataColumn>
+        <DataColumn name="operatedpamanionAmount">
+          <Property name="property">operatedpamanionAmount</Property>
+        </DataColumn>
+        <DataColumn name="operatedpfs">
+          <Property name="property">operatedpfs</Property>
+        </DataColumn>
+        <DataColumn name="operatedpfc">
+          <Property name="property">operatedpfc</Property>
+        </DataColumn>
+        <DataColumn name="operatedlime">
+          <Property name="property">operatedlime</Property>
+        </DataColumn>
+        <DataColumn name="operatedsludge">
+          <Property name="property">operatedsludge</Property>
+        </DataColumn>
+        <DataColumn name="operatednutrient">
+          <Property name="property">operatednutrient</Property>
+        </DataColumn>
+      </DataGrid>
+    </Container>
+    <Dialog id="dialogDetail">
+      <Property name="visible">false</Property>
+      <Property name="height">100%</Property>
+      <Property name="width">100%</Property>
+      <Property name="closeable">false</Property>
+      <Buttons>
+        <Button id="buttonSave">
+          <Property name="caption">保存</Property>
+        </Button>
+        <Button id="buttonClose">
+          <Property name="caption">关闭</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <SplitPanel>
+          <Property name="direction">bottom</Property>
+          <Property name="position">40%</Property>
+          <MainControl>
+            <AutoForm id="autoFormOperated">
+              <Property name="dataSet">dataSetOperated</Property>
+              <Property name="cols">*,*,*,*</Property>
+              <Property name="labelWidth">140</Property>
+              <AutoFormElement>
+                <Property name="name">operatedcompany</Property>
+                <Property name="property">operatedcompany</Property>
+                <Property name="readOnly">false</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operateddate</Property>
+                <Property name="property">operateddate</Property>
+                <Property name="readOnly">false</Property>
+                <Editor/>
+              </AutoFormElement>
+              <Label/>
+              <Label/>
+              <AutoFormElement>
+                <Property name="name">operatedinflowTotal</Property>
+                <Property name="property">operatedinflowTotal</Property>
+                <Editor>
+                  <TextEditor id="textEditorInflow"/>
+                </Editor>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedinflow</Property>
+                <Property name="property">operatedinflow</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedoutflowTotal</Property>
+                <Property name="property">operatedoutflowTotal</Property>
+                <Editor>
+                  <TextEditor id="textEditorOutflow"/>
+                </Editor>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedoutflow</Property>
+                <Property name="property">operatedoutflow</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedpower</Property>
+                <Property name="property">operatedpower</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">industrialpower</Property>
+                <Property name="property">industrialpower</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">residentialpower</Property>
+                <Property name="property">residentialpower</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedpfs</Property>
+                <Property name="property">operatedpfs</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedpfc</Property>
+                <Property name="property">operatedpfc</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatednaclo</Property>
+                <Property name="property">operatednaclo</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedpacAmount</Property>
+                <Property name="property">operatedpacAmount</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedpamkationAmount</Property>
+                <Property name="property">operatedpamkationAmount</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedpamanionAmount</Property>
+                <Property name="property">operatedpamanionAmount</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatednonionicAmount</Property>
+                <Property name="property">operatednonionicAmount</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedlime</Property>
+                <Property name="property">operatedlime</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedfilterpressTime</Property>
+                <Property name="property">operatedfilterpressTime</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatedsludge</Property>
+                <Property name="property">operatedsludge</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">operatednutrient</Property>
+                <Property name="property">operatednutrient</Property>
+                <Editor/>
+              </AutoFormElement>
+              <Label/>
+              <Label/>
+              <Label/>
+              <AutoFormElement layoutConstraint="colSpan:4;rowSpan:3">
+                <Property name="name">by2</Property>
+                <Property name="property">by2</Property>
+                <Editor>
+                  <TextArea layoutConstraint="colSpan:2"/>
+                </Editor>
+              </AutoFormElement>
+              <AutoFormElement layoutConstraint="colSpan:4;rowSpan:3">
+                <Property name="name">by1</Property>
+                <Property name="property">by1</Property>
+                <Editor>
+                  <TextArea layoutConstraint="colSpan:2"/>
+                </Editor>
+              </AutoFormElement>
+              <AutoFormElement layoutConstraint="colSpan:2;rowSpan:1">
+                <Property name="name">memo</Property>
+                <Property name="property">memo</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">keyinName</Property>
+                <Property name="property">keyinName</Property>
+                <Editor/>
+              </AutoFormElement>
+            </AutoForm>
+          </MainControl>
+          <SideControl>
+            <TabControl>
+              <Property name="width">100%</Property>
+              <Property name="height">100%</Property>
+              <Property name="tabMinWidth">80</Property>
+              <ControlTab id="tabAnalysisIn">
+                <Property name="caption">系统水样</Property>
+                <Container id="containerAnalysisIn">
+                  <DataPilot id="dataPilotAnalysisIn">
+                    <Property name="dataPath">#.analysisInSet</Property>
+                    <Property name="dataSet">dataSetOperated</Property>
+                    <Property name="itemCodes">+,-,x</Property>
+                  </DataPilot>
+                  <DataGrid id="dataGridAnalysisIn">
+                    <Property name="dataSet">dataSetOperated</Property>
+                    <Property name="dataPath">#.analysisInSet</Property>
+                    <DataColumn>
+                      <Property name="property">process</Property>
+                      <Property name="trigger">dataSetDropDownProcess</Property>
+                      <Property name="name">process</Property>
+                    </DataColumn>
+                    <DataColumn name="analysiscod">
+                      <Property name="property">analysiscod</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisph">
+                      <Property name="property">analysisph</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisnh">
+                      <Property name="property">analysisnh</Property>
+                    </DataColumn>
+                    <DataColumn name="analysistn">
+                      <Property name="property">analysistn</Property>
+                    </DataColumn>
+                    <DataColumn name="analysistp">
+                      <Property name="property">analysistp</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisss">
+                      <Property name="property">analysisss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisbod">
+                      <Property name="property">analysisbod</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisdo">
+                      <Property name="property">analysisdo</Property>
+                    </DataColumn>
+                    <DataColumn name="analysissv">
+                      <Property name="property">analysissv</Property>
+                    </DataColumn>
+                    <DataColumn name="analysismlss">
+                      <Property name="property">analysismlss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysismlvss">
+                      <Property name="property">analysismlvss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysissvi">
+                      <Property name="property">analysissvi</Property>
+                    </DataColumn>
+                  </DataGrid>
+                </Container>
+              </ControlTab>
+              <ControlTab id="tabAnalysisOut">
+                <Property name="caption">外单位水样</Property>
+                <Container id="containerAnalysisOut">
+                  <DataPilot id="dataPilotAnalysisOut">
+                    <Property name="itemCodes">+,-,x</Property>
+                    <Property name="dataPath">#.analysisOutSet</Property>
+                    <Property name="dataSet">dataSetOperated</Property>
+                  </DataPilot>
+                  <DataGrid id="dataGridAnalysisOut">
+                    <Property name="dataSet">dataSetOperated</Property>
+                    <Property name="dataPath">#.analysisOutSet</Property>
+                    <DataColumn>
+                      <Property name="property">biscompany</Property>
+                      <Property name="trigger">dataSetDropDownBiscompany</Property>
+                      <Property name="name">biscompany</Property>
+                    </DataColumn>
+                    <DataColumn name="analysiscod">
+                      <Property name="property">analysiscod</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisph">
+                      <Property name="property">analysisph</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisnh">
+                      <Property name="property">analysisnh</Property>
+                    </DataColumn>
+                    <DataColumn name="analysistn">
+                      <Property name="property">analysistn</Property>
+                    </DataColumn>
+                    <DataColumn name="analysistp">
+                      <Property name="property">analysistp</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisss">
+                      <Property name="property">analysisss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisbod">
+                      <Property name="property">analysisbod</Property>
+                    </DataColumn>
+                  </DataGrid>
+                </Container>
+              </ControlTab>
+              <ControlTab id="tabAnalysisElse">
+                <Property name="caption">其他水样</Property>
+                <Container id="containerAnalysisElse">
+                  <DataPilot id="dataPilotAnalysisElse">
+                    <Property name="dataSet">dataSetOperated</Property>
+                    <Property name="dataPath">#.analysisElseSet</Property>
+                    <Property name="itemCodes">+,-,x</Property>
+                  </DataPilot>
+                  <DataGrid id="dataGridAnalysisElse">
+                    <Property name="dataSet">dataSetOperated</Property>
+                    <Property name="dataPath">#.analysisElseSet</Property>
+                    <DataColumn name="sample">
+                      <Property name="property">sample</Property>
+                    </DataColumn>
+                    <DataColumn name="analysiscod">
+                      <Property name="property">analysiscod</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisph">
+                      <Property name="property">analysisph</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisnh">
+                      <Property name="property">analysisnh</Property>
+                    </DataColumn>
+                    <DataColumn name="analysistn">
+                      <Property name="property">analysistn</Property>
+                    </DataColumn>
+                    <DataColumn name="analysistp">
+                      <Property name="property">analysistp</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisss">
+                      <Property name="property">analysisss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisbod">
+                      <Property name="property">analysisbod</Property>
+                    </DataColumn>
+                    <DataColumn name="analysisdo">
+                      <Property name="property">analysisdo</Property>
+                    </DataColumn>
+                    <DataColumn name="analysismlss">
+                      <Property name="property">analysismlss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysissv">
+                      <Property name="property">analysissv</Property>
+                    </DataColumn>
+                    <DataColumn name="analysismlvss">
+                      <Property name="property">analysismlvss</Property>
+                    </DataColumn>
+                    <DataColumn name="analysissvi">
+                      <Property name="property">analysissvi</Property>
+                    </DataColumn>
+                  </DataGrid>
+                </Container>
+              </ControlTab>
+            </TabControl>
+          </SideControl>
+        </SplitPanel>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <UpdateAction id="updateActionSaveOperateds">
+      <Property name="dataResolver">operatedDao#saveOperateds</Property>
+      <Property name="executingMessage">正在保存.....</Property>
+      <Property name="successMessage">提交成功</Property>
+      <UpdateItem>
+        <Property name="dataSet">dataSetOperated</Property>
+        <Property name="submitSimplePropertyOnly">false</Property>
+        <Property name="alias">operateds</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <Container id="containerRerprt">
+      <Property name="visible">false</Property>
+      <Property name="hideMode">display</Property>
+      <UReportControl id="uReport">
+        <Property name="exportType">htmlpreview</Property>
+        <Property name="reportSource">classpath</Property>
+      </UReportControl>
+    </Container>
+    <Container id="containerImport">
+      <Property name="hideMode">display</Property>
+      <Property name="visible">false</Property>
+      <Import id="DropDownProcess" src="views.funs.dropdown#DropDownProcess"/>
+      <Import id="DropDownBiscompany" src="views.funs.dropdown#DropDownBiscompany"/>
+    </Container>
+  </View>
+</ViewConfig>

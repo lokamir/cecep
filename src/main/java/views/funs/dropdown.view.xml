@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dataTypeOperated" parent="global:dataTypeOperated"/>
+    <DataType name="dataTypeAnalysisIntr" parent="global:dataTypeAnalysisIntr"/>
+    <DataType name="dataTypeAnalysisExt" parent="global:dataTypeAnalysisExt"/>
+    <DataType name="dataTypeAnalysisElse" parent="global:dataTypeAnalysisElse"/>
+    <DataType name="dataTypeProcess" parent="global:dataTypeProcess">
+      <Property name="defaultDisplayProperty">name</Property>
+    </DataType>
+    <DataType name="dataTypeBiscompany" parent="global:dataTypeBiscompany">
+      <Property name="defaultDisplayProperty">name</Property>
+    </DataType>
+  </Model>
+  <View>
+    <AutoForm id="autoFormDropdown">
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="labelWidth">150</Property>
+      <Property name="cols">*,*,*</Property>
+      <AutoFormElement id="autoFormElementDropDownProcess">
+        <Property name="trigger">dataSetDropDownProcess</Property>
+        <Property name="label">工艺段</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="trigger">dataSetDropDownBiscompany</Property>
+        <Property name="label">接管企业名称</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <GroupStart id="DropDownProcess"/>
+    <DataSet id="dataSetProcess">
+      <Property name="dataType">[dataTypeProcess]</Property>
+      <Property name="dataProvider">processDao#loadProcess</Property>
+    </DataSet>
+    <DataSetDropDown id="dataSetDropDownProcess">
+      <Property name="dataSet">dataSetProcess</Property>
+      <Property name="displayProperty">name</Property>
+    </DataSetDropDown>
+    <GroupEnd/>
+    <GroupStart id="DropDownBiscompany"/>
+    <DataSet id="dataSetBiscompany">
+      <Property name="dataType">[dataTypeBiscompany]</Property>
+      <Property name="dataProvider">biscompanyDao#loadbiscompany</Property>
+    </DataSet>
+    <DataSetDropDown id="dataSetDropDownBiscompany">
+      <Property name="dataSet">dataSetBiscompany</Property>
+      <Property name="displayProperty">name</Property>
+    </DataSetDropDown>
+    <GroupEnd/>
+  </View>
+</ViewConfig>

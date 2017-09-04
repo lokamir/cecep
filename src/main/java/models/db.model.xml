@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model>
+  <DataType name="dataTypeAnalysisElse">
+    <Property name="creationType">entity.AnalysisElse</Property>
+    <PropertyDef name="deptid">
+      <Property name="dataType">String</Property>
+      <Property name="label">污水厂名称</Property>
+      <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+      <Property name="mapping">
+        <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+      </Property>
+    </PropertyDef>
+    <PropertyDef name="date">
+      <Property name="dataType">Date</Property>
+      <Property name="label">日期</Property>
+      <Property name="defaultValue">${util.getToday()}</Property>
+    </PropertyDef>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID</Property>
+    </PropertyDef>
+    <PropertyDef name="cod">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">COD</Property>
+    </PropertyDef>
+    <PropertyDef name="ph">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">PH</Property>
+    </PropertyDef>
+    <PropertyDef name="ss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SS</Property>
+    </PropertyDef>
+    <PropertyDef name="nh">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">NH3-N</Property>
+    </PropertyDef>
+    <PropertyDef name="tn">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">TN</Property>
+    </PropertyDef>
+    <PropertyDef name="tp">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">TP</Property>
+    </PropertyDef>
+    <PropertyDef name="bod">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">BOD</Property>
+    </PropertyDef>
+    <PropertyDef name="oxygen">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">Do</Property>
+    </PropertyDef>
+    <PropertyDef name="mlss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">MLSS</Property>
+    </PropertyDef>
+    <PropertyDef name="sv">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SV</Property>
+    </PropertyDef>
+    <PropertyDef name="mlvss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">MLVSS</Property>
+    </PropertyDef>
+    <PropertyDef name="svi">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SVI</Property>
+    </PropertyDef>
+    <PropertyDef name="specimen">
+      <Property></Property>
+      <Property name="label">水样名称</Property>
+    </PropertyDef>
+    <PropertyDef name="keyinid">
+      <Property></Property>
+      <Property name="label">录入人</Property>
+      <Property name="defaultValue">${loginUser.getCname()}</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+      <Property name="defaultValue">true</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="dataTypeAnalysisExt">
+    <Property name="creationType">entity.AnalysisExt</Property>
+    <PropertyDef name="deptid">
+      <Property name="dataType">String</Property>
+      <Property name="label">污水厂名称</Property>
+      <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+      <Property name="mapping">
+        <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+      </Property>
+    </PropertyDef>
+    <PropertyDef name="date">
+      <Property name="dataType">Date</Property>
+      <Property name="label">日期</Property>
+      <Property name="defaultValue">${util.getToday()}</Property>
+    </PropertyDef>
+    <PropertyDef name="keyinid">
+      <Property name="label">录入人</Property>
+      <Property name="defaultValue">${loginUser.getCname()}</Property>
+    </PropertyDef>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID</Property>
+    </PropertyDef>
+    <PropertyDef name="cod">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">COD</Property>
+    </PropertyDef>
+    <PropertyDef name="ph">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">PH</Property>
+    </PropertyDef>
+    <PropertyDef name="ss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SS</Property>
+    </PropertyDef>
+    <PropertyDef name="nh">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">NH3-N</Property>
+    </PropertyDef>
+    <PropertyDef name="tn">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">TN</Property>
+    </PropertyDef>
+    <PropertyDef name="tp">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">TP</Property>
+    </PropertyDef>
+    <PropertyDef name="bod">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">BOD</Property>
+    </PropertyDef>
+    <PropertyDef name="intflux">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">接收水量</Property>
+    </PropertyDef>
+    <PropertyDef name="influxtotal">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">计量表示数</Property>
+    </PropertyDef>
+    <PropertyDef name="temperature">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">水温</Property>
+    </PropertyDef>
+    <PropertyDef name="salinity">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">盐度</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+      <Property name="defaultValue">true</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="dataTypeAnalysisIntr">
+    <Property name="creationType">entity.AnalysisIntr</Property>
+    <PropertyDef name="deptid">
+      <Property name="dataType">String</Property>
+      <Property name="label">污水厂名称</Property>
+      <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+      <Property name="mapping">
+        <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+      </Property>
+    </PropertyDef>
+    <PropertyDef name="date">
+      <Property name="dataType">Date</Property>
+      <Property name="label">日期</Property>
+      <Property name="defaultValue">${util.getToday()}</Property>
+    </PropertyDef>
+    <PropertyDef name="keyinid">
+      <Property name="label">录入人</Property>
+      <Property name="defaultValue">${loginUser.getCname()}</Property>
+    </PropertyDef>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID</Property>
+    </PropertyDef>
+    <PropertyDef name="cod">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">COD</Property>
+    </PropertyDef>
+    <PropertyDef name="ph">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">PH</Property>
+    </PropertyDef>
+    <PropertyDef name="ss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SS</Property>
+    </PropertyDef>
+    <PropertyDef name="nh">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">NH3-N</Property>
+    </PropertyDef>
+    <PropertyDef name="tn">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">TN</Property>
+    </PropertyDef>
+    <PropertyDef name="tp">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">TP</Property>
+    </PropertyDef>
+    <PropertyDef name="bod">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">BOD</Property>
+    </PropertyDef>
+    <PropertyDef name="temperature">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">水温</Property>
+    </PropertyDef>
+    <PropertyDef name="salinity">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">盐度</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+      <Property name="defaultValue">true</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="dataTypeBiscompany">
+    <Property name="creationType">entity.Biscompany</Property>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID</Property>
+    </PropertyDef>
+    <PropertyDef name="name">
+      <Property></Property>
+      <Property name="label">接管企业名称</Property>
+    </PropertyDef>
+    <PropertyDef name="deptid">
+      <Property name="dataType">String</Property>
+      <Property name="label">隶属水厂</Property>
+    </PropertyDef>
+    <PropertyDef name="adr">
+      <Property></Property>
+      <Property name="label">地址</Property>
+    </PropertyDef>
+    <PropertyDef name="tel">
+      <Property></Property>
+      <Property name="label">联系方式</Property>
+    </PropertyDef>
+    <PropertyDef name="cont">
+      <Property></Property>
+      <Property name="label">联系人</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+      <Property name="defaultValue">true</Property>
+    </PropertyDef>
+    <PropertyDef name="memo">
+      <Property></Property>
+      <Property name="label">备注</Property>
+    </PropertyDef>
+    <PropertyDef name="timestamp">
+      <Property name="dataType">Date</Property>
+      <Property name="label">timestamp</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="dataTypeOperated">
+    <Property name="creationType">entity.Operated</Property>
+    <PropertyDef name="keyinid">
+      <Property name="label">录入人</Property>
+      <Property name="defaultValue">${loginUser.getCname()}</Property>
+    </PropertyDef>
+    <PropertyDef name="deptid">
+      <Property name="label">污水厂名称</Property>
+      <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+      <Property name="mapping">
+        <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+      </Property>
+      <Property name="dataType">String</Property>
+    </PropertyDef>
+    <PropertyDef name="date">
+      <Property name="dataType">Date</Property>
+      <Property name="label">日期</Property>
+      <Property name="defaultValue">${util.getToday()}</Property>
+    </PropertyDef>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID</Property>
+    </PropertyDef>
+    <PropertyDef name="intrflux">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">进水量（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="extflux">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">出水量（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="intrfluxCp">
+      <Property name="dataType">int</Property>
+      <Property name="label">进水补位码</Property>
+    </PropertyDef>
+    <PropertyDef name="extfluxCp">
+      <Property name="dataType">int</Property>
+      <Property name="label">出水补位码</Property>
+    </PropertyDef>
+    <PropertyDef name="intrfluxTotal">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">进水流量计示数</Property>
+    </PropertyDef>
+    <PropertyDef name="extfluxTotal">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">出水流量计示数</Property>
+    </PropertyDef>
+    <PropertyDef name="intrflowBefore">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">不用</Property>
+    </PropertyDef>
+    <PropertyDef name="extfluxBefore">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">不用</Property>
+    </PropertyDef>
+    <PropertyDef name="pacAmount">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">PAC用量（kg）</Property>
+    </PropertyDef>
+    <PropertyDef name="pamkationAmount">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">阳离子用量（kg）</Property>
+    </PropertyDef>
+    <PropertyDef name="pamanionAmount">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">阴离子用量（kg）</Property>
+    </PropertyDef>
+    <PropertyDef name="nonionicAmount">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">非离子（kg）</Property>
+    </PropertyDef>
+    <PropertyDef name="nutrient">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">外加碳源（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="naclo">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">次氯酸钠（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="pfs">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">聚合硫酸铁用量（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="pfc">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">聚合氯化铁用量（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="lime">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">生石灰用量（kg）</Property>
+    </PropertyDef>
+    <PropertyDef name="filterpressTime">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">压泥时间(小时)</Property>
+    </PropertyDef>
+    <PropertyDef name="power">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">用电量（kwh）</Property>
+    </PropertyDef>
+    <PropertyDef name="inapower">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">工业用电（kwh）</Property>
+    </PropertyDef>
+    <PropertyDef name="resdpower">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">生活用电（kwh）</Property>
+    </PropertyDef>
+    <PropertyDef name="sludge">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">污泥产量（吨）</Property>
+    </PropertyDef>
+    <PropertyDef name="by1">
+      <Property></Property>
+      <Property name="label">设备维修情况</Property>
+    </PropertyDef>
+    <PropertyDef name="by2">
+      <Property></Property>
+      <Property name="label">设备运行情况</Property>
+    </PropertyDef>
+    <PropertyDef name="memo">
+      <Property></Property>
+      <Property name="label">备注</Property>
+    </PropertyDef>
+    <PropertyDef name="addTime">
+      <Property name="dataType">Date</Property>
+      <Property name="label">add_time</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+      <Property name="defaultValue">true</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="dataTypeProcess">
+    <Property name="creationType">entity.Process</Property>
+    <PropertyDef name="processid">
+      <Property name="dataType">int</Property>
+      <Property name="label">污水厂名</Property>
+    </PropertyDef>
+    <PropertyDef name="name">
+      <Property></Property>
+      <Property name="label">工艺段名称</Property>
+    </PropertyDef>
+    <PropertyDef name="deptid">
+      <Property name="dataType">String</Property>
+      <Property name="label">隶属水厂</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+    </PropertyDef>
+    <PropertyDef name="memo">
+      <Property></Property>
+      <Property name="label">备注</Property>
+    </PropertyDef>
+    <PropertyDef name="timestemp">
+      <Property name="dataType">Date</Property>
+      <Property name="label">timestemp</Property>
+    </PropertyDef>
+  </DataType>
+  <DataType name="dataTypeAnalysisSludge">
+    <Property name="creationType">entity.AnalysisSludge</Property>
+    <PropertyDef name="deptid">
+      <Property></Property>
+      <Property name="label">污水厂名称</Property>
+      <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+      <Property name="mapping">
+        <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+      </Property>
+    </PropertyDef>
+    <PropertyDef name="date">
+      <Property></Property>
+      <Property name="label">日期</Property>
+      <Property name="defaultValue">${util.getToday()}</Property>
+      <Property name="dataType">Date</Property>
+    </PropertyDef>
+    <PropertyDef name="keyinid">
+      <Property></Property>
+      <Property name="label">录入人</Property>
+      <Property name="defaultValue">${loginUser.getCname()}</Property>
+    </PropertyDef>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">ID</Property>
+    </PropertyDef>
+    <PropertyDef name="oxygen">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">DO</Property>
+    </PropertyDef>
+    <PropertyDef name="mlss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">MLSS</Property>
+    </PropertyDef>
+    <PropertyDef name="sv">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SV</Property>
+    </PropertyDef>
+    <PropertyDef name="mlvss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">MLVSS</Property>
+    </PropertyDef>
+    <PropertyDef name="svi">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SVI</Property>
+    </PropertyDef>
+    <PropertyDef name="ss">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">SS</Property>
+    </PropertyDef>
+    <PropertyDef name="waratio">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">含水率</Property>
+    </PropertyDef>
+    <PropertyDef name="ph">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">PH</Property>
+    </PropertyDef>
+    <PropertyDef name="valid">
+      <Property name="dataType">boolean</Property>
+      <Property name="label">valid</Property>
+    </PropertyDef>
+  </DataType>
+</Model>

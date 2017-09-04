@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Property name="metaData">
+    <Property name="securityTag">ajax</Property>
+  </Property>
+  <View layout="form cols:*,*,*;rowHeight:150" style="margin:16px">
+    <Property name="title">菜单</Property>
+    <SimpleButton>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.Operated.d&quot;);</ClientEvent>
+      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
+ $(&quot;&lt;label> 系统运行数据&lt;/label>&quot;).appendTo(div);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton id="simpleButton">
+      <ClientEvent name="onCreateDom">    var div = self.getDom();&#xD;
+    $(&quot;&lt;label> 系统水样数据&lt;/label>&quot;).appendTo(div);&#xD;
+</ClientEvent>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.AnalysisIntr.d&quot;);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
+ $(&quot;&lt;label> 外场水样数据&lt;/label>&quot;).appendTo(div);</ClientEvent>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.AnalysisExt.d&quot;);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
+ $(&quot;&lt;label> 污泥化验数据&lt;/label>&quot;).appendTo(div);</ClientEvent>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.AnalysisSludge.d&quot;);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.Daily.d&quot;);</ClientEvent>
+      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
+ $(&quot;&lt;label>日报表导出&lt;/label>&quot;).appendTo(div);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.Monthly.d&quot;);</ClientEvent>
+      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
+ $(&quot;&lt;label>月报表导出&lt;/label>&quot;).appendTo(div);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <ClientEvent name="onClick">window.open(&quot;views.projs.Extbilling.d&quot;);</ClientEvent>
+      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
+ $(&quot;&lt;label>月水量收费表&lt;/label>&quot;).appendTo(div);</ClientEvent>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+    <SimpleButton>
+      <Property name="className">button1</Property>
+      <Property name="hoverClassName">button_hover</Property>
+    </SimpleButton>
+  </View>
+</ViewConfig>

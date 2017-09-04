@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+.button1{
+    border: 1px solid gray;
+    background-color: cornflowerblue;
+    height:100%;
+    color: white;
+    font-size: 30px;
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-reght: 50px;
+}
+.button_hover{
+    border: 1px solid gray;
+    background-color: seashell;
+    cursor: pointer;
+    height:100%;
+    color: black;
+}
+
+.button2{
+    border: 1px solid gray;
+    background-color: mediumaquamarine;
+    height:100%;
+}
+.button3{
+    border: 1px solid gray;
+    background-color: brown;
+    height:100%;
+}
+.button4{
+    border: 1px solid gray;
+    background-color: cadetblue;
+    height:100%;
+}
+.button5{
+    border: 1px solid gray;
+    background-color: chocolate;
+    height:100%;
+}
+.button6{
+    border: 1px solid gray;
+    background-color: cornflowerblue;
+    height:100%;
+}
+.button7{
+    border: 1px solid gray;
+    background-color: darkmagenta;
+    height:100%;
+}
+.button8{
+    border: 1px solid gray;
+    background-color: mediumpurple;
+    height:100%;
+}
+.button9{
+    border: 1px solid gray;
+    background-color: darkseagreen;
+    height:100%;
+}
