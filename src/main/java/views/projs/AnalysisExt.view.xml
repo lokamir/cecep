@@ -57,7 +57,7 @@
     <Property name="title">外场数据维护</Property>
     <DataSet id="dataSetAnalysisExt">
       <Property name="dataProvider">analysisExtDao#queryPage</Property>
-      <Property name="pageSize">20</Property>
+      <Property name="pageSize">99</Property>
       <Property name="dataType">[dataTypeAnalysisExt]</Property>
     </DataSet>
     <UpdateAction id="actionUpdate">
@@ -89,7 +89,7 @@ switch(arg.code){&#xD;
 	}&#xD;
 }</ClientEvent>
         <Property name="dataSet">dataSetAnalysisExt</Property>
-        <Property name="itemCodes">pages,+,-,x</Property>
+        <Property name="itemCodes">pageSize,pages,+,-,x</Property>
       </DataPilot>
       <Separator/>
       <ToolBarButton>
@@ -172,6 +172,7 @@ with (view.get(&quot;#dataSetAnalysisExt&quot;)){&#xD;
       </DataColumn>
       <DataColumn name="cod">
         <Property name="property">cod</Property>
+        <Property name="supportsOptionMenu">true</Property>
       </DataColumn>
       <DataColumn name="ph">
         <Property name="property">ph</Property>
@@ -190,12 +191,15 @@ with (view.get(&quot;#dataSetAnalysisExt&quot;)){&#xD;
       </DataColumn>
       <DataColumn name="bod">
         <Property name="property">bod</Property>
+        <Property name="visible">false</Property>
       </DataColumn>
       <DataColumn name="temperature">
         <Property name="property">temperature</Property>
+        <Property name="visible">false</Property>
       </DataColumn>
       <DataColumn name="salinity">
         <Property name="property">salinity</Property>
+        <Property name="visible">false</Property>
       </DataColumn>
     </DataGrid>
     <Dialog id="dialogAnalysisExt">

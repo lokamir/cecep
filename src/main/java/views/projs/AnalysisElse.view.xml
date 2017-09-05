@@ -43,7 +43,7 @@
     <Property name="title">其他化验数据维护</Property>
     <DataSet id="dataSetAnalysisElse">
       <Property name="dataProvider">analysisElseDao#queryPage</Property>
-      <Property name="pageSize">20</Property>
+      <Property name="pageSize">99</Property>
       <Property name="dataType">[dataTypeAnalysisElse]</Property>
     </DataSet>
     <UpdateAction id="actionUpdate">
@@ -75,7 +75,7 @@ switch(arg.code){&#xD;
 	}&#xD;
 }</ClientEvent>
         <Property name="dataSet">dataSetAnalysisElse</Property>
-        <Property name="itemCodes">pages,+,-,x</Property>
+        <Property name="itemCodes">pageSize,pages,+,-,x</Property>
       </DataPilot>
       <Separator/>
       <ToolBarButton>

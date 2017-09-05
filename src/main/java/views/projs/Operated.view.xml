@@ -45,7 +45,7 @@
     <Property name="title">运营数据维护</Property>
     <DataSet id="dataSetOperated">
       <Property name="dataProvider">operatedDao#queryPage</Property>
-      <Property name="pageSize">20</Property>
+      <Property name="pageSize">99</Property>
       <Property name="dataType">[dataTypeOperated]</Property>
     </DataSet>
     <UpdateAction id="actionUpdate">
@@ -77,7 +77,7 @@ switch(arg.code){&#xD;
 	}&#xD;
 }</ClientEvent>
         <Property name="dataSet">dataSetOperated</Property>
-        <Property name="itemCodes">pages,+,-,x</Property>
+        <Property name="itemCodes">pageSize,pages,+,-,x</Property>
       </DataPilot>
       <Separator/>
       <ToolBarButton>
@@ -134,6 +134,8 @@ with (view.get(&quot;#dataSetOperated&quot;)){&#xD;
       <Property name="dataSet">dataSetOperated</Property>
       <Property name="dataType">dataTypeOperated</Property>
       <Property name="readOnly">true</Property>
+      <Property name="showFooter">false</Property>
+      <Property name="showGroupFooter">false</Property>
       <DataColumn name="date">
         <Property name="property">date</Property>
       </DataColumn>
@@ -257,6 +259,8 @@ dorado.MessageBox.confirm(&quot;您真的要取消当前操作吗？&quot;,funct
           <AutoFormElement>
             <Property name="name">pacAmount</Property>
             <Property name="property">pacAmount</Property>
+            <Property name="hideMode">display</Property>
+            <Property name="visible">false</Property>
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>
@@ -267,6 +271,8 @@ dorado.MessageBox.confirm(&quot;您真的要取消当前操作吗？&quot;,funct
           <AutoFormElement>
             <Property name="name">pamanionAmount</Property>
             <Property name="property">pamanionAmount</Property>
+            <Property name="visible">false</Property>
+            <Property name="hideMode">display</Property>
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>
@@ -292,11 +298,15 @@ dorado.MessageBox.confirm(&quot;您真的要取消当前操作吗？&quot;,funct
           <AutoFormElement>
             <Property name="name">pfc</Property>
             <Property name="property">pfc</Property>
+            <Property name="visible">false</Property>
+            <Property name="hideMode">display</Property>
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>
             <Property name="name">lime</Property>
             <Property name="property">lime</Property>
+            <Property name="hideMode">display</Property>
+            <Property name="visible">false</Property>
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>

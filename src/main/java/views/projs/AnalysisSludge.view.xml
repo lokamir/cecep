@@ -57,7 +57,7 @@
     <Property name="title">污泥项目数据维护</Property>
     <DataSet id="dataSetAnalysisSludge">
       <Property name="dataProvider">analysisSludgeDao#queryPage</Property>
-      <Property name="pageSize">20</Property>
+      <Property name="pageSize">99</Property>
       <Property name="dataType">[dataTypeAnalysisSludge]</Property>
     </DataSet>
     <UpdateAction id="actionUpdate">
@@ -89,7 +89,7 @@ switch(arg.code){&#xD;
 	}&#xD;
 }</ClientEvent>
         <Property name="dataSet">dataSetAnalysisSludge</Property>
-        <Property name="itemCodes">pages,+,-,x</Property>
+        <Property name="itemCodes">pageSize,pages,+,-,x</Property>
       </DataPilot>
       <Separator/>
       <ToolBarButton>
@@ -183,12 +183,15 @@ with (view.get(&quot;#dataSetAnalysisSludge&quot;)){&#xD;
       </DataColumn>
       <DataColumn name="waratio">
         <Property name="property">waratio</Property>
+        <Property name="visible">false</Property>
       </DataColumn>
       <DataColumn name="ss">
         <Property name="property">ss</Property>
+        <Property name="visible">false</Property>
       </DataColumn>
       <DataColumn name="ph">
         <Property name="property">ph</Property>
+        <Property name="visible">false</Property>
       </DataColumn>
       <DataColumn name="keyinid">
         <Property name="property">keyinid</Property>
