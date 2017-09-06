@@ -1,3 +1,4 @@
 /target
 datasources.xml
-index.jsp
+
+src/main/webapp/index.jsp
