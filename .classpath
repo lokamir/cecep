@@ -22,6 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/mylib/dorado-skin-lokamirstyle-1.0.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/cecep-plugin"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
