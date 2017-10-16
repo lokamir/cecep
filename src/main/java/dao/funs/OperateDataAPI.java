@@ -1,6 +1,8 @@
 package dao.funs;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +29,12 @@ public class OperateDataAPI extends HibernateDao implements IController {
 		String deptId = request.getParameter("deptId");
 		String date = request.getParameter("date");
 		
-		String hql = "from " + Operated.class.getName()+" where 1=1 and deptId = " +deptId +" and date = "+date;
-		this.query(hql);
+		String hql = "from " + Operated.class.getName()+" where 1=1 and deptId = " +deptId +" and date = '"+date+"'";
+		Collection<Operated> q= this.query(hql);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;charset=utf8");
+		PrintWriter pw = response.getWriter();
+		pw.print(q.toString());
 
 	}
 
