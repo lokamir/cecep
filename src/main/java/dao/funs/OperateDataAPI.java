@@ -8,11 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
 import com.bstek.bdf2.core.controller.IController;
 import com.bstek.bdf2.core.orm.hibernate.HibernateDao;
 
 import entity.Operated;
-
 public class OperateDataAPI extends HibernateDao implements IController {
 
 	public String getUrl() {

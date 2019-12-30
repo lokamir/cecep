@@ -3,65 +3,94 @@
   <Property name="metaData">
     <Property name="securityTag">ajax</Property>
   </Property>
-  <View layout="form cols:*,*,*;rowHeight:150" style="margin:16px">
+  <Model/>
+  <View layout="anchor">
     <Property name="title">菜单</Property>
-    <SimpleButton>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.Operated.d&quot;);</ClientEvent>
-      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
- $(&quot;&lt;label> 系统运行数据&lt;/label>&quot;).appendTo(div);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton id="simpleButton">
-      <ClientEvent name="onCreateDom">    var div = self.getDom();&#xD;
-    $(&quot;&lt;label> 系统水样数据&lt;/label>&quot;).appendTo(div);&#xD;
+    <Property name="packages">assets</Property>
+    <Button id="buttonAdmin" caption="管理" layoutConstraint="top:6;right:12" tip="管理">
+      <Property name="ui">highlight</Property>
+      <Property name="iconClass">fa fa-cog</Property>
+    </Button>
+    <Button id="buttonSkin" layoutConstraint="top:6;right:4;anchorRight:previous">
+      <Property name="ui">highlight</Property>
+      <Property name="iconClass">fa fa-retweet</Property>
+      <Property name="caption">换肤</Property>
+      <Property name="tip">换肤</Property>
+      <Property name="menu">menuSkins</Property>
+    </Button>
+    <SplitPanel layoutConstraint="left:0;right:0;top:0;anchorTop:previous;bottom:0" position="260">
+      <MainControl>
+        <IFrame id="frameExample"/>
+      </MainControl>
+      <SideControl>
+        <Accordion id="accordion">
+          <Section>
+            <Property name="caption">菜单</Property>
+            <Property name="iconClass">fa fa-sitemap</Property>
+            <Container layout="vbox">
+              <Property name="contentOverflow">hidden</Property>
+              <ListBox>
+                <ClientEvent name="onClick">var data = self.get(&quot;currentItem&quot;);&#xD;
+view.get(&quot;#frameExample&quot;).set(&quot;path&quot;,&quot;./views.projs.Operated.d&quot;);&#xD;
 </ClientEvent>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.AnalysisIntr.d&quot;);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
- $(&quot;&lt;label> 外场水样数据&lt;/label>&quot;).appendTo(div);</ClientEvent>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.AnalysisExt.d&quot;);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
- $(&quot;&lt;label> 污泥化验数据&lt;/label>&quot;).appendTo(div);</ClientEvent>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.AnalysisSludge.d&quot;);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.Daily.d&quot;);</ClientEvent>
-      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
- $(&quot;&lt;label>日报表导出&lt;/label>&quot;).appendTo(div);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.Monthly.d&quot;);</ClientEvent>
-      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
- $(&quot;&lt;label>月报表导出&lt;/label>&quot;).appendTo(div);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <ClientEvent name="onClick">window.open(&quot;views.projs.Extbilling.d&quot;);</ClientEvent>
-      <ClientEvent name="onCreateDom"> var div = self.getDom();&#xD;
- $(&quot;&lt;label>月水量收费表&lt;/label>&quot;).appendTo(div);</ClientEvent>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
-    <SimpleButton>
-      <Property name="className">button1</Property>
-      <Property name="hoverClassName">button_hover</Property>
-    </SimpleButton>
+                <Property name="items">系统运行数据,系统水样数据,外场水样数据,污泥化验数据</Property>
+                <Property name="dragMode">item</Property>
+              </ListBox>
+            </Container>
+          </Section>
+          <Section>
+            <Property name="caption">统计报表</Property>
+            <Property name="iconClass">fa fa-sitemap</Property>
+            <Container layout="vbox">
+              <Property name="contentOverflow">hidden</Property>
+              <ListBox>
+                <Property name="items">日报表导出,月报表导出,月水量收费表</Property>
+              </ListBox>
+            </Container>
+          </Section>
+        </Accordion>
+      </SideControl>
+    </SplitPanel>
+    <Tip id="tipSkin">
+      <Property name="content">来试试Dorado7.4新增的皮肤吧！</Property>
+      <Property name="caption">小提示</Property>
+      <Property name="closeable">true</Property>
+      <Property name="arrowAlign">right</Property>
+      <Property name="arrowDirection">top</Property>
+      <Property name="icon">INFO</Property>
+      <Property name="hideAnimateType">fade</Property>
+      <Property name="showDuration">5</Property>
+    </Tip>
+    <Menu id="menuSkins">
+      <CheckableMenuItem>
+        <Property name="caption">天际（不支持低版本IE）</Property>
+        <Property name="userData">modern</Property>
+        <Property name="tags">skin-item</Property>
+      </CheckableMenuItem>
+      <CheckableMenuItem>
+        <Property name="caption">珊瑚礁</Property>
+        <Property name="userData">default</Property>
+        <Property name="tags">skin-item</Property>
+      </CheckableMenuItem>
+      <CheckableMenuItem>
+        <Property name="caption">蓝天白云</Property>
+        <Property name="userData">blue-sky</Property>
+        <Property name="tags">skin-item</Property>
+      </CheckableMenuItem>
+      <CheckableMenuItem>
+        <Property name="caption">简洁红</Property>
+        <Property name="userData">concise-red</Property>
+        <Property name="tags">skin-item</Property>
+      </CheckableMenuItem>
+      <CheckableMenuItem>
+        <Property name="caption">破晓（不支持低版本IE）</Property>
+        <Property name="userData">daybreak</Property>
+        <Property name="tags">skin-item</Property>
+      </CheckableMenuItem>
+      <Separator/>
+      <MenuItem id="menuMoreSkin">
+        <Property name="caption">了解更多Dorado皮肤...</Property>
+      </MenuItem>
+    </Menu>
   </View>
 </ViewConfig>

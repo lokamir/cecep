@@ -43,6 +43,7 @@
   </Model>
   <View>
     <Property name="title">运营数据维护</Property>
+    <Property name="packages">assets</Property>
     <DataSet id="dataSetOperated">
       <Property name="dataProvider">operatedDao#queryPage</Property>
       <Property name="pageSize">99</Property>

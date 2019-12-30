@@ -10,5 +10,30 @@
 	<Packages>
 		<Package name="common" pattern="js">
 		</Package>
+		
+		<Package name="assets" pattern="css" >
+        
+        classpath:views/resources/bootstrap/css/bootstrap,
+        classpath:views/resources/font-awesome/css/font-awesome.min,
+        classpath:views/resources/icomoon/style,
+        classpath:views/resources/uniform/css/default,
+        classpath:views/resources/switchery/switchery.min,
+        classpath:views/resources/dropzone/dropzone.min,
+        classpath:views/resources/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue,
+        classpath:views/resources/css/ecaps.min,
+        classpath:views/resources/css/custom
+    	</Package>
+    	<!-- <Package name="assets" pattern="js" depends = "jquery,assets-css">
+        classpath:views/resources/jquery/jquery-3.1.0.min,
+        classpath:views/resources/bootstrap/js/bootstrap.min,
+        classpath:views/resources/jquery-slimscroll/jquery.slimscroll.min,
+        classpath:views/resources/uniform/js/jquery.uniform.standalone,
+        classpath:views/resources/switchery/switchery.min,
+        classpath:views/resources/dropzone/dropzone.min,
+        classpath:views/resources/plupload/js/plupload.full.min,
+        classpath:views/resources/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min,
+        classpath:views/resources/js/ecaps.min,
+        classpath:views/resources/js/pages/form-file-upload
+    	</Package>  -->
 	</Packages>
 </config>
