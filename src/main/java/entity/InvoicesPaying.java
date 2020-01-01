@@ -61,7 +61,7 @@ public class InvoicesPaying implements Serializable {
 	/**
 	 * 费用类别:费用类别
 	 */
-	@PropertyDef(label = "费用类别", description = "费用类别:费用类别")
+	@PropertyDef(label = " ", description = " ")
 	private int transportId;
 
 	/**

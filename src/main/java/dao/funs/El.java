@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import entity.Bdf2Dept;
 import entity.Biscompany;
+import entity.InvoicesDetail;
 import entity.Operated;
 import entity.Process;
 
@@ -90,6 +91,18 @@ public class El extends HibernateDao {
 		return mapValue;
 	}
 	
+//  ${dorado.getDataProvider("el#mapCategoryDetailId").getResult()}
+	@DataProvider
+	public Map<Integer, String> mapCategoryDetailId() {
+		List<InvoicesDetail> invoicesDetails = this.query("from " + InvoicesDetail.class.getName());
+		Map<Integer, String> mapValue = new LinkedHashMap<Integer, String>();
+		//mapValue.put(null, "");
+		for (InvoicesDetail invoicesDetail : invoicesDetails) {
+			mapValue.put(invoicesDetail.getCategoryDetailId(), invoicesDetail.getName());
+		}
+		return mapValue;
+	}
+	
 	
 	//是否有效
 	//  ${dorado.getDataProvider("el#mapValid").getResult()}
@@ -97,11 +110,38 @@ public class El extends HibernateDao {
 	public Map<String, String> mapValid() {
 		Map<String, String> mapValue = new LinkedHashMap<String, String>();
 		mapValue.put("2","全部");
-		mapValue.put("1","否");
-		mapValue.put("0","是");
+		mapValue.put("1","是");
+		mapValue.put("0","否");
 		return mapValue;
 	}
 	
+	//是否有效
+		//  ${dorado.getDataProvider("el#mapBooleanValid").getResult()}
+		@DataProvider
+		public Map<Boolean, String> mapBooleanValid() {
+			Map<Boolean, String> mapValue = new LinkedHashMap<Boolean, String>();
+			mapValue.put(null,"全部");
+			mapValue.put(Boolean.TRUE,"是");
+			mapValue.put(Boolean.FALSE,"否");
+			return mapValue;
+		}
+	
+		//  单据报销执行记录流程
+		//  ${dorado.getDataProvider("el#mapInvoicesPsid").getResult()}
+		@DataProvider
+		public Map<Integer, String> mapInvoicesPsid() {
+			Map<Integer, String> mapValue = new LinkedHashMap<Integer, String>();
+			mapValue.put(0,"未报送");
+			mapValue.put(1,"已报送");
+			mapValue.put(2,"运管部已签");
+			mapValue.put(3,"财务部已签");
+			mapValue.put(4,"副总经理已签");
+			mapValue.put(5,"财务总监已签");
+			mapValue.put(6,"总经理已签");
+			mapValue.put(7,"签单结束");
+			return mapValue;
+		}
+		
 
 	
 	//  接管企业

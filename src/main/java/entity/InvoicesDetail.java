@@ -97,7 +97,7 @@ public class InvoicesDetail implements Serializable {
 		this.deptid = deptid;
 	}
 
-	@Column(name = "deptId", length = 25, nullable = false)
+	@Column(name = "deptId", length = 25 , nullable=false)
 	public String getDeptid() {
 		return deptid;
 	}
@@ -129,7 +129,7 @@ public class InvoicesDetail implements Serializable {
 		return del;
 	}
 	
-	public void setTimestemp(Date timestemp) {
+/*	public void setTimestemp(Date timestemp) {
 		this.timestemp = timestemp;
 	}
 
@@ -137,7 +137,7 @@ public class InvoicesDetail implements Serializable {
 	@Column(name = "timestemp", nullable = false)
 	public Date getTimestemp() {
 		return timestemp;
-	}
+	}*/
 
 	public String toString() {
 		return "InvoicesDetail [categoryDetailId=" + categoryDetailId

@@ -44,18 +44,32 @@ public class InvoicesTransport implements Serializable {
 	@PropertyDef(label = "已付或未付", description = "已付或未付:已付或未付")
 	private boolean valid;
 
+	/**
+	 * pid:
+	 */
+	@PropertyDef(label = "pid", description = "pid:")
+	private int pid;
+
+	/**
+	 * 流转环节:流转环节
+	 */
+	@PropertyDef(label = "流转环节", description = "流转环节:流转环节")
+	private String taskname;
+
 	public InvoicesTransport() {
 		super();
 	}
 
 	public InvoicesTransport(int transportId, String keyinid, Date addTime,
-			Date endTime, boolean valid) {
+			Date endTime, boolean valid, int pid, String taskname) {
 		super();
 		this.transportId = transportId;
 		this.keyinid = keyinid;
 		this.addTime = addTime;
 		this.endTime = endTime;
 		this.valid = valid;
+		this.pid = pid;
+		this.taskname = taskname;
 	}
 
 	public void setTransportId(int transportId) {
@@ -78,7 +92,7 @@ public class InvoicesTransport implements Serializable {
 		return keyinid;
 	}
 
-	public void setAddTime(Date addTime) {
+/*	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
@@ -86,7 +100,7 @@ public class InvoicesTransport implements Serializable {
 	@Column(name = "add_time", nullable = false)
 	public Date getAddTime() {
 		return addTime;
-	}
+	}*/
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
@@ -107,10 +121,29 @@ public class InvoicesTransport implements Serializable {
 		return valid;
 	}
 
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
+	@Column(name = "pid")
+	public int getPid() {
+		return pid;
+	}
+
+	public void setTaskname(String taskname) {
+		this.taskname = taskname;
+	}
+
+	@Column(name = "taskname", length = 25)
+	public String getTaskname() {
+		return taskname;
+	}
+
 	public String toString() {
 		return "InvoicesTransport [transportId=" + transportId + ",keyinid="
 				+ keyinid + ",addTime=" + addTime + ",endTime=" + endTime
-				+ ",valid=" + valid + "]";
+				+ ",valid=" + valid + ",pid=" + pid + ",taskname=" + taskname
+				+ "]";
 	}
 
 }

@@ -11,30 +11,31 @@ import com.bstek.dorado.annotation.DataResolver;
 import com.bstek.dorado.data.entity.EntityState;
 import com.bstek.dorado.data.entity.EntityUtils;
 
-import entity.InvoicesTransport;
+import entity.InvoicesDetail;
 
 @Component
 public class InvoicesDetailDao extends HibernateDao{
 	@DataProvider
-	public Collection<InvoicesTransport> loadinvoicesTransport() throws Exception {
-			String hql="from " + InvoicesTransport.class.getName();
+	public Collection<InvoicesDetail> loadinvoicesDetail() throws Exception {
+			String hql="from " + InvoicesDetail.class.getName()+" where del = 0 ";
 			return this.query(hql);
 	}
 	
 	@DataResolver
-	public void InvoicesTransport(Collection<InvoicesTransport> invoicesTransports) throws Exception {
+	public void InvoicesDetail(Collection<InvoicesDetail> invoicesDetails) throws Exception {
 		Session session = this.getSessionFactory().openSession();
 		try{
-			for(InvoicesTransport invoicesTransport : invoicesTransports){
-				EntityState state = EntityUtils.getState(invoicesTransport);
+			for(InvoicesDetail invoicesDetail : invoicesDetails){
+				EntityState state = EntityUtils.getState(invoicesDetail);
 				if(state.equals(EntityState.NEW)){
-					session.save(invoicesTransport);
+					session.save(invoicesDetail);
 				}
 				if(state.equals(EntityState.MODIFIED)){
-					session.update(invoicesTransport);
+					session.update(invoicesDetail);
 				}
 				if(state.equals(EntityState.DELETED)){
-					session.update(invoicesTransport);
+					invoicesDetail.setDel(1);
+					session.update(invoicesDetail);
 				}
 			}
 		

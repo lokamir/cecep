@@ -38,7 +38,8 @@ public class InvoicesPayingDao extends HibernateDao {
 		boolean bcontains = false;
 		boolean econtains = false;
 		boolean deptidcontains = false;
-		boolean sncontains = false;
+		boolean categoryDetailIdcontains = false;
+		boolean contentcontains = false;
 		boolean validcontains = false;
 		String whereCase = " where 1 = 1 ";
 		IUser user = ContextHolder.getLoginUser();
@@ -51,7 +52,8 @@ public class InvoicesPayingDao extends HibernateDao {
 			bcontains = param.containsKey("beginDate");
 			econtains = param.containsKey("endDate");
 			deptidcontains = param.containsKey("deptid");
-			sncontains = param.containsKey("sn");
+			categoryDetailIdcontains = param.containsKey("categoryDetailId");
+			contentcontains = param.containsKey("content");
 			validcontains = param.containsKey("valid");
 		}
 		if(bcontains && param.get("beginDate")!=null ){
@@ -67,17 +69,21 @@ public class InvoicesPayingDao extends HibernateDao {
 					+ date + "' ,'%Y-%m-%d')";
 		}
 		if(deptidcontains && !param.get("deptid").toString().equals("")){
-			whereCase += " And CUS_ID = " + param.get("deptid");
+			whereCase += " And deptid = " + param.get("deptid");
 		}
 		if(validcontains && !param.get("valid").toString().equals("")){
 			whereCase += " And VALID = " + param.get("valid");
 		}
-		if(sncontains && !param.get("sn").toString().equals("")){
-			String sn = param.get("sn").toString();
-			if(isNumeric(sn)){
+		if(categoryDetailIdcontains && !param.get("categoryDetailId").toString().equals("")){
+			String sn = param.get("categoryDetailIdcontains").toString();
+			/*if(isNumeric(sn)){
 				sn = subStrForMath(sn);
-			}
+			}*/
+			whereCase += " And categoryDetailId = " + param.get("categoryDetailId");
 			whereCase += " And sn like '%" + sn + "%'";
+		}
+		if(contentcontains && !param.get("content").toString().equals("")){
+			whereCase += " And content like '%" + param.get("content") + "%'";
 		}
 		if(isadmin){
 			sql = " from " + InvoicesPaying.class.getName() + whereCase + " and del = 0 order by id desc";
@@ -92,7 +98,7 @@ public class InvoicesPayingDao extends HibernateDao {
 	            }
 			}
 			s.deleteCharAt(0);*/
-			whereCase += " And CUS_ID = '" + arg.toString()+"'";
+			whereCase += " And keyinId = '" + arg.toString()+"'";
 			sql = " from " + InvoicesPaying.class.getName() + whereCase + " and del = 0 order by id desc ";
 		}
 		this.pagingQuery(page, sql , "select count(*) "+sql);

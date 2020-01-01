@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dataTypeInvoicesPaying" parent="global:dataTypeInvoicesPaying">
+      <PropertyDef name="psid">
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapInvoicesPsid&quot;).getResult()}</Property>
+        </Property>
+        <Property name="defaultValue">0</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeformCondition">
+      <PropertyDef name="beginDate">
+        <Property name="label">开始日期</Property>
+        <Property name="displayFormat">Y年m月d日</Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+      <PropertyDef name="endDate">
+        <Property name="label">结束日期</Property>
+        <Property name="displayFormat">Y年m月d日</Property>
+        <Property name="dataType">Date</Property>
+      </PropertyDef>
+      <PropertyDef name="deptid">
+        <Property name="label">水厂名称</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="categoryDetailId">
+        <Property name="label">费用类别</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapCategoryDetailId&quot;).getResult()}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="content">
+        <Property name="label">单据内容</Property>
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="valid">
+        <Property name="label">是否付款</Property>
+        <Property name="dataType">Boolean</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBooleanValid&quot;).getResult()}</Property>
+        </Property>
+        <Property name="defaultValue">false</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="dataTypeInvoicesTransport" parent="global:dataTypeInvoicesTransport"/>
+  </Model>
+  <View>
+    <Property name="title">单据报销执行记录</Property>
+    <DataSet id="dataSetInvoicesPaying">
+      <Property name="dataProvider">invoicesPayingDao#loadInvoicesPaying</Property>
+      <Property name="dataType">[dataTypeInvoicesPaying]</Property>
+    </DataSet>
+    <DataSet id="dataSetInvoicesTransport">
+      <Property name="dataProvider">invoicesTransportDao#loadinvoicesTransport</Property>
+      <Property name="dataType">[dataTypeInvoicesTransport]</Property>
+    </DataSet>
+    <UpdateAction id="actionUpdate">
+      <Property name="successMessage">保存成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">invoicesPayingDao#saveInvoicesPaying</Property>
+      <UpdateItem>
+        <Property name="dataSet">dataSetInvoicesPaying</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <UpdateAction id="actionInvoicesTransport">
+      <Property name="successMessage">保存成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">invoicesTransportDao#InvoicesTransport</Property>
+      <UpdateItem>
+        <Property name="dataSet">dataSetInvoicesTransport</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <ToolBar>
+      <DataPilot id="dataPilotInvoicesPaying">
+        <Property name="dataSet">dataSetInvoicesPaying</Property>
+        <Property name="itemCodes">pageSize,pages,+,-,x</Property>
+      </DataPilot>
+      <Separator/>
+      <ToolBarButton id="toolBarButtonEdit">
+        <Property name="caption">修改</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -200px -0px</Property>
+      </ToolBarButton>
+      <ToolBarButton id="toolBarButtonSubmit">
+        <Property name="caption">提交</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -140px -20px</Property>
+        <Property name="hideMode">display</Property>
+      </ToolBarButton>
+      <ToolBarButton id="toolBarButtonQuery">
+        <Property name="caption">查询</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -20px -40px</Property>
+      </ToolBarButton>
+    </ToolBar>
+    <AutoForm id="formCondition">
+      <Property name="cols">*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">dataTypeformCondition</Property>
+      <AutoFormElement>
+        <Property name="name">beginDate</Property>
+        <Property name="property">beginDate</Property>
+        <Property name="trigger">defaultDateDropDown</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">endDate</Property>
+        <Property name="property">endDate</Property>
+        <Property name="trigger">defaultDateDropDown</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">deptid</Property>
+        <Property name="property">deptid</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">categoryDetailId</Property>
+        <Property name="property">categoryDetailId</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">content</Property>
+        <Property name="property">content</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">valid</Property>
+        <Property name="property">valid</Property>
+      </AutoFormElement>
+    </AutoForm>
+    <DataGrid id="dataGridInvoicesPaying">
+      <Property name="dataSet">dataSetInvoicesPaying</Property>
+      <Property name="dataType">dataTypeInvoicesPaying</Property>
+      <Property name="readOnly">true</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <RowSelectorColumn/>
+      <RowNumColumn/>
+      <DataColumn name="createDate">
+        <Property name="property">createDate</Property>
+      </DataColumn>
+      <DataColumn name="deptid">
+        <Property name="property">deptid</Property>
+      </DataColumn>
+      <DataColumn name="keyinid">
+        <Property name="property">keyinid</Property>
+      </DataColumn>
+      <DataColumn name="categoryPaying">
+        <Property name="property">categoryPaying</Property>
+      </DataColumn>
+      <DataColumn name="categoryDetailId">
+        <Property name="property">categoryDetailId</Property>
+      </DataColumn>
+      <DataColumn name="content">
+        <Property name="property">content</Property>
+      </DataColumn>
+      <DataColumn name="billing">
+        <Property name="property">billing</Property>
+      </DataColumn>
+      <DataColumn name="aorb">
+        <Property name="property">aorb</Property>
+      </DataColumn>
+      <DataColumn name="sn">
+        <Property name="property">sn</Property>
+      </DataColumn>
+      <DataColumn name="psid">
+        <Property name="property">psid</Property>
+      </DataColumn>
+      <DataColumn name="valid">
+        <Property name="property">valid</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogInvoicesPaying">
+      <Property name="center">true</Property>
+      <Property name="width">1000</Property>
+      <Property name="height">400</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">false</Property>
+      <Property name="caption">单据明细</Property>
+      <Buttons>
+        <Button id="buttonSubmit">
+          <Property name="caption">保存</Property>
+          <Property name="icon">url(>skin>common/icons.gif) -140px -20px</Property>
+        </Button>
+        <Button id="buttonCancel">
+          <Property name="caption">取消</Property>
+          <Property name="icon">url(>skin>common/icons.gif) -40px -0px</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="dataSet">dataSetInvoicesPaying</Property>
+          <Property name="cols">*,*,*</Property>
+          <AutoFormElement>
+            <Property name="name">createDate</Property>
+            <Property name="property">createDate</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">deptid</Property>
+            <Property name="property">deptid</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">psid</Property>
+            <Property name="property">psid</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">sn</Property>
+            <Property name="property">sn</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">categoryPaying</Property>
+            <Property name="property">categoryPaying</Property>
+            <Property name="trigger">categoryPaying</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">aorb</Property>
+            <Property name="property">aorb</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">categoryDetailId</Property>
+            <Property name="property">categoryDetailId</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">billing</Property>
+            <Property name="property">billing</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">content</Property>
+            <Property name="property">content</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">keyinid</Property>
+            <Property name="property">keyinid</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+        <DataGrid id="dataGridInvoicesTransport">
+          <Property name="dataSet">dataSetInvoicesTransport</Property>
+          <RowNumColumn/>
+          <DataColumn name="taskname">
+            <Property name="property">taskname</Property>
+          </DataColumn>
+          <DataColumn name="endTime">
+            <Property name="property">endTime</Property>
+            <Property name="caption">完成时间</Property>
+          </DataColumn>
+          <DataColumn name="keyinid">
+            <Property name="property">keyinid</Property>
+          </DataColumn>
+        </DataGrid>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <ListDropDown id="categoryPaying">
+      <Property name="items">付款申请,报销申请</Property>
+    </ListDropDown>
+  </View>
+</ViewConfig>

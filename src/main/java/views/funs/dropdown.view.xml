@@ -13,6 +13,9 @@
     <DataType name="dataTypeBiscompany" parent="global:dataTypeBiscompany">
       <Property name="defaultDisplayProperty">name</Property>
     </DataType>
+    <DataType name="dataTypeInvoicesDetail" parent="global:dataTypeInvoicesDetail">
+      <Property name="defaultDisplayProperty">name</Property>
+    </DataType>
   </Model>
   <View>
     <AutoForm id="autoFormDropdown">
@@ -30,6 +33,8 @@
         <Editor/>
       </AutoFormElement>
       <AutoFormElement>
+        <Property name="trigger">dataSetDropDownInvoicesDetail</Property>
+        <Property name="label">费用类别</Property>
         <Editor/>
       </AutoFormElement>
     </AutoForm>
@@ -50,6 +55,16 @@
     </DataSet>
     <DataSetDropDown id="dataSetDropDownBiscompany">
       <Property name="dataSet">dataSetBiscompany</Property>
+      <Property name="displayProperty">name</Property>
+    </DataSetDropDown>
+    <GroupEnd/>
+    <GroupStart id="DropDownInvoicesDetail"/>
+    <DataSet id="dataSetInvoicesDetail">
+      <Property name="dataType">[dataTypeInvoicesDetail]</Property>
+      <Property name="dataProvider">invoicesDetailDao#loadinvoicesDetail</Property>
+    </DataSet>
+    <DataSetDropDown id="dataSetDropDownInvoicesDetail">
+      <Property name="dataSet">dataSetInvoicesDetail</Property>
       <Property name="displayProperty">name</Property>
     </DataSetDropDown>
     <GroupEnd/>

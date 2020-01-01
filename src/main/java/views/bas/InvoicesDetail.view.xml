@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="dataTypeInvoicesDetail" parent="global:dataTypeInvoicesDetail">
+      <PropertyDef name="name">
+        <Property/>
+        <Property name="label">单据费用类别名称</Property>
+      </PropertyDef>
+      <PropertyDef name="valid">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">启用</Property>
+      </PropertyDef>
+      <PropertyDef name="memo">
+        <Property/>
+        <Property name="label">备注</Property>
+      </PropertyDef>
+      <PropertyDef name="del">
+        <Property name="dataType">int</Property>
+        <Property name="label">删除</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="title">费用类别维护页面</Property>
+    <DataSet id="dataSetInvoicesDetail">
+      <Property name="dataProvider">invoicesDetailDao#loadinvoicesDetail</Property>
+      <Property name="dataType">[dataTypeInvoicesDetail]</Property>
+    </DataSet>
+    <UpdateAction id="actionUpdate">
+      <Property name="successMessage">保存成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">invoicesDetailDao#InvoicesDetail</Property>
+      <UpdateItem>
+        <Property name="dataSet">dataSetInvoicesDetail</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <ToolBar>
+      <DataPilot id="pilot">
+        <Property name="dataSet">dataSetInvoicesDetail</Property>
+        <Property name="itemCodes">pageSize,pages,+,-</Property>
+      </DataPilot>
+      <Separator/>
+      <ToolBarButton id="edit">
+        <Property name="caption">编辑</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -200px -0px</Property>
+        <Property name="visible">false</Property>
+        <Property name="hideMode">display</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <Property name="caption">保存</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -140px -20px</Property>
+        <Property name="action">actionUpdate</Property>
+        <Property name="visible">true</Property>
+        <Property name="hideMode">display</Property>
+      </ToolBarButton>
+      <ToolBarButton id="query">
+        <Property name="caption">查询</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -20px -40px</Property>
+        <Property name="visible">false</Property>
+      </ToolBarButton>
+    </ToolBar>
+    <DataGrid id="dataGrid">
+      <Property name="dataSet">dataSetInvoicesDetail</Property>
+      <Property name="dataType">dataTypeInvoicesDetail</Property>
+      <Property name="readOnly">false</Property>
+      <Property name="width">40%</Property>
+      <RowNumColumn/>
+      <DataColumn>
+        <Property name="property">name</Property>
+        <Property name="name">name</Property>
+        <Property name="align">center</Property>
+        <Property name="width">250</Property>
+      </DataColumn>
+      <DataColumn>
+        <Property name="property">memo</Property>
+        <Property name="name">memo</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+  </View>
+</ViewConfig>
