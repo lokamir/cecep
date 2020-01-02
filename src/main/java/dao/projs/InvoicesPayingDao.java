@@ -12,14 +12,15 @@ import java.util.regex.Pattern;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import com.bstek.bdf2.core.context.ContextHolder;
-import com.bstek.bdf2.core.model.Group;
 import com.bstek.bdf2.core.orm.hibernate.HibernateDao;
 import com.bstek.dorado.annotation.DataProvider;
 import com.bstek.dorado.annotation.DataResolver;
 import com.bstek.dorado.data.entity.EntityState;
 import com.bstek.dorado.data.entity.EntityUtils;
 import com.bstek.dorado.data.provider.Page;
+import com.bstek.bdf2.core.business.IDept;
 import com.bstek.bdf2.core.business.IUser;
+
 import entity.InvoicesPaying;
 @Component
 public class InvoicesPayingDao extends HibernateDao {
@@ -46,7 +47,7 @@ public class InvoicesPayingDao extends HibernateDao {
 		if(user == null){
 			return;
 		}
-		List<Group> bdf2Groups = ContextHolder.getLoginUser().getGroups();
+		List<IDept> IDepts = ContextHolder.getLoginUser().getDepts();
 		boolean isadmin = ContextHolder.getLoginUser().isAdministrator();
 		if(param != null){
 			bcontains = param.containsKey("beginDate");
@@ -58,23 +59,23 @@ public class InvoicesPayingDao extends HibernateDao {
 		}
 		if(bcontains && param.get("beginDate")!=null ){
 			Date beginDate = (Date)param.get("beginDate");
-			String date =new SimpleDateFormat("YYYY-MM-dd").format(beginDate);
-			whereCase += " And DATE_FORMAT(ORDERDATE,'%Y-%m-%d') >= DATE_FORMAT('"
+			String date =new SimpleDateFormat("yyyy-MM-dd").format(beginDate);
+			whereCase += " And DATE_FORMAT(Create_Date,'%Y-%m-%d') >= DATE_FORMAT('"
 					+ date + "' ,'%Y-%m-%d')";
 		}
 		if(econtains && param.get("endDate")!=null ){
 			Date endDate = (Date)param.get("endDate");
-			String date =new SimpleDateFormat("YYYY-MM-dd").format(endDate);
-			whereCase += " And DATE_FORMAT(ORDERDATE,'%Y-%m-%d') <= DATE_FORMAT('"
+			String date =new SimpleDateFormat("yyyy-M-dd").format(endDate);
+			whereCase += " And DATE_FORMAT(Create_Date,'%Y-%m-%d') <= DATE_FORMAT('"
 					+ date + "' ,'%Y-%m-%d')";
 		}
 		if(deptidcontains && !param.get("deptid").toString().equals("")){
 			whereCase += " And deptid = " + param.get("deptid");
 		}
-		if(validcontains && !param.get("valid").toString().equals("")){
+		if(validcontains && !param.get("valid").toString().equals("2")){
 			whereCase += " And VALID = " + param.get("valid");
 		}
-		if(categoryDetailIdcontains && !param.get("categoryDetailId").toString().equals("")){
+		if(categoryDetailIdcontains && !param.get("categoryDetailId").toString().equals("2")){
 			String sn = param.get("categoryDetailIdcontains").toString();
 			/*if(isNumeric(sn)){
 				sn = subStrForMath(sn);
@@ -88,7 +89,7 @@ public class InvoicesPayingDao extends HibernateDao {
 		if(isadmin){
 			sql = " from " + InvoicesPaying.class.getName() + whereCase + " and del = 0 order by id desc";
 		}else{
-			String arg = bdf2Groups.get(0).getName();
+			//String arg = IDepts.get(0).getName();
 			/*Collection<Bdf2Group> customers = groupDao.loadCustomerForRank(arg);
 			StringBuilder s = new StringBuilder();
 			for(Bdf2Group customer:customers){
@@ -98,7 +99,7 @@ public class InvoicesPayingDao extends HibernateDao {
 	            }
 			}
 			s.deleteCharAt(0);*/
-			whereCase += " And keyinId = '" + arg.toString()+"'";
+			//whereCase += " And deptId = '" + arg.toString()+"'";
 			sql = " from " + InvoicesPaying.class.getName() + whereCase + " and del = 0 order by id desc ";
 		}
 		this.pagingQuery(page, sql , "select count(*) "+sql);

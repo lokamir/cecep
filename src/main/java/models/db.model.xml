@@ -575,7 +575,7 @@
     </PropertyDef>
     <PropertyDef name="valid">
       <Property name="dataType">boolean</Property>
-      <Property name="label">已付或未付</Property>
+      <Property name="label">付款情况</Property>
     </PropertyDef>
     <PropertyDef name="del">
       <Property name="dataType">int</Property>

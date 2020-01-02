@@ -27,6 +27,7 @@
         <Property name="mapping">
           <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
         </Property>
+        <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
       </PropertyDef>
       <PropertyDef name="categoryDetailId">
         <Property name="label">费用类别</Property>
@@ -40,11 +41,11 @@
       </PropertyDef>
       <PropertyDef name="valid">
         <Property name="label">是否付款</Property>
-        <Property name="dataType">Boolean</Property>
+        <Property name="dataType">String</Property>
         <Property name="mapping">
-          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBooleanValid&quot;).getResult()}</Property>
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapValid&quot;).getResult()}</Property>
         </Property>
-        <Property name="defaultValue">false</Property>
+        <Property name="defaultValue">0</Property>
       </PropertyDef>
     </DataType>
     <DataType name="dataTypeInvoicesTransport" parent="global:dataTypeInvoicesTransport"/>
@@ -52,8 +53,9 @@
   <View>
     <Property name="title">单据报销执行记录</Property>
     <DataSet id="dataSetInvoicesPaying">
-      <Property name="dataProvider">invoicesPayingDao#loadInvoicesPaying</Property>
+      <Property name="dataProvider">invoicesPayingDao#queryPage</Property>
       <Property name="dataType">[dataTypeInvoicesPaying]</Property>
+      <Property name="pageSize">99</Property>
     </DataSet>
     <DataSet id="dataSetInvoicesTransport">
       <Property name="dataProvider">invoicesTransportDao#loadinvoicesTransport</Property>
@@ -68,9 +70,9 @@
       </UpdateItem>
     </UpdateAction>
     <UpdateAction id="actionInvoicesTransport">
-      <Property name="successMessage">保存成功!</Property>
       <Property name="executingMessage">正在保存...</Property>
       <Property name="dataResolver">invoicesTransportDao#InvoicesTransport</Property>
+      <Property name="successMessage">保存成功!</Property>
       <UpdateItem>
         <Property name="dataSet">dataSetInvoicesTransport</Property>
       </UpdateItem>
@@ -114,6 +116,7 @@
       <AutoFormElement>
         <Property name="name">deptid</Property>
         <Property name="property">deptid</Property>
+        <Property name="readOnly">true</Property>
         <Editor/>
       </AutoFormElement>
       <AutoFormElement>
@@ -140,36 +143,47 @@
       <RowNumColumn/>
       <DataColumn name="createDate">
         <Property name="property">createDate</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="deptid">
         <Property name="property">deptid</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="keyinid">
         <Property name="property">keyinid</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="categoryPaying">
         <Property name="property">categoryPaying</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="categoryDetailId">
         <Property name="property">categoryDetailId</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="content">
         <Property name="property">content</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="billing">
         <Property name="property">billing</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="aorb">
         <Property name="property">aorb</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="sn">
         <Property name="property">sn</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="psid">
         <Property name="property">psid</Property>
+        <Property name="align">center</Property>
       </DataColumn>
       <DataColumn name="valid">
         <Property name="property">valid</Property>
+        <Property name="align">center</Property>
       </DataColumn>
     </DataGrid>
     <Dialog id="dialogInvoicesPaying">
@@ -190,7 +204,7 @@
         </Button>
       </Buttons>
       <Children>
-        <AutoForm>
+        <AutoForm id="autoForm">
           <Property name="dataSet">dataSetInvoicesPaying</Property>
           <Property name="cols">*,*,*</Property>
           <AutoFormElement>
@@ -222,7 +236,9 @@
           <AutoFormElement>
             <Property name="name">aorb</Property>
             <Property name="property">aorb</Property>
-            <Editor/>
+            <Editor>
+              <TextEditor id="text"/>
+            </Editor>
           </AutoFormElement>
           <AutoFormElement>
             <Property name="name">categoryDetailId</Property>
