@@ -1,8 +1,21 @@
 var loginusername = "${loginUser.getCname()}";
+var loginuserdept = "${dorado.getDataProvider('el#Deptid').getResult()}";
+
+/** @Bind view.onReady */
+!function(self,arg){
+	if(loginuserdept == "00111" ){
+		view.get("#toolBarButtonSubmit").set("visible",true);
+		view.get("#dataPilotInvoicesPaying").set("itemCodes","pageSize,pages");
+		view.get("#toolBarButtonEdit").set("visible",false);
+	}else{
+		view.get("#toolBarButtonSubmit").set("visible",false);
+		view.get("#dataPilotInvoicesPaying").set("itemCodes","pageSize,pages,+,-");
+		view.get("#toolBarButtonEdit").set("visible",true);
+	}
+};
 
 /** @Bind #dataPilotInvoicesPaying.onSubControlAction */
 !function(self,arg){
-	debugger;
 	var datas = view.get("#dataSetInvoicesPaying.data");
 	//不让dataSetInvoicesTransport加载数据
 	view.get("#dataSetInvoicesTransport").set("parameter", -1).flushAsync();
@@ -52,7 +65,7 @@ var loginusername = "${loginUser.getCname()}";
 	
 };
 
-
+/* =======================查询按钮=================== */
 /** @Bind #toolBarButtonQuery.onClick */
 !function(self,arg){
 	var data = view.get("#formCondition.entity");
@@ -61,6 +74,19 @@ var loginusername = "${loginUser.getCname()}";
 		flushAsync();
 	}
 };
+
+/** @Bind #tabControl.onTabChange */
+!function(self,arg){
+	var data = view.get("#formCondition.entity");
+	if(view.get("#tabControl").get("currentTab.caption")=="正在签批"){		
+		data.set("valid",0);
+		view.get("#dataSetInvoicesPaying").set("parameter", data).flushAsync();
+	}else{
+		data.set("valid",1);
+		view.get("#dataSetInvoicesPaying").set("parameter", data).flushAsync();
+	}
+};
+
 
 /** @Bind #buttonSubmit.onClick */
 !function(self,arg){
@@ -126,6 +152,31 @@ dorado.MessageBox.confirm("您真的要取消当前操作吗？",function(){
 			});
 			self.set("#valid.renderer", new OperationCellRenderer());
 }
+
+/* =======================付款按钮2=================== */
+/** @Bind #dataGridInvoicesPaying2.onCreate */
+!function(self,arg){
+	var OperationCellRenderer = $extend(dorado.widget.grid.SubControlCellRenderer,
+			{
+			    refreshSubControl : function(button, arg) {
+			    	var psid = arg.data.get("psid");
+			        var valid = arg.data.get("valid");
+			        if(psid == 7){
+			        	button.set({
+			        		caption : (valid != "1") ? "未付款" : "已付款",
+			        				disabled : (valid == "1")
+			        	});			        	
+			        }else{
+			        	button.set({
+			        		caption : "签批中",
+			        		disabled : true
+			        	});	
+			        }
+			    }
+			});
+			self.set("#valid.renderer", new OperationCellRenderer());
+}
+
 
 /* =======================aorb的key-vlaue=================== */
 /** @Bind #autoForm.onReady */

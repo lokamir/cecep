@@ -45,7 +45,12 @@
         <Property name="mapping">
           <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapValid&quot;).getResult()}</Property>
         </Property>
-        <Property name="defaultValue">0</Property>
+      </PropertyDef>
+      <PropertyDef name="psid">
+        <Property name="label">流转环节</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapInvoicesPsid&quot;).getResult()}</Property>
+        </Property>
       </PropertyDef>
     </DataType>
     <DataType name="dataTypeInvoicesTransport" parent="global:dataTypeInvoicesTransport"/>
@@ -56,6 +61,12 @@
       <Property name="dataProvider">invoicesPayingDao#queryPage</Property>
       <Property name="dataType">[dataTypeInvoicesPaying]</Property>
       <Property name="pageSize">99</Property>
+      <Property name="parameter">
+        <Entity>
+          <Property name="valid">0</Property>
+          <Property name="deptid">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+        </Entity>
+      </Property>
     </DataSet>
     <DataSet id="dataSetInvoicesTransport">
       <Property name="dataProvider">invoicesTransportDao#loadinvoicesTransport</Property>
@@ -80,12 +91,13 @@
     <ToolBar>
       <DataPilot id="dataPilotInvoicesPaying">
         <Property name="dataSet">dataSetInvoicesPaying</Property>
-        <Property name="itemCodes">pageSize,pages,+,-,x</Property>
+        <Property name="hideMode">display</Property>
       </DataPilot>
       <Separator/>
       <ToolBarButton id="toolBarButtonEdit">
         <Property name="caption">修改</Property>
         <Property name="icon">url(>skin>common/icons.gif) -200px -0px</Property>
+        <Property name="hideMode">display</Property>
       </ToolBarButton>
       <ToolBarButton id="toolBarButtonSubmit">
         <Property name="caption">提交</Property>
@@ -95,6 +107,7 @@
       <ToolBarButton id="toolBarButtonQuery">
         <Property name="caption">查询</Property>
         <Property name="icon">url(>skin>common/icons.gif) -20px -40px</Property>
+        <Property name="hideMode">display</Property>
       </ToolBarButton>
     </ToolBar>
     <AutoForm id="formCondition">
@@ -130,10 +143,27 @@
         <Editor/>
       </AutoFormElement>
       <AutoFormElement>
+        <Property name="name">psid</Property>
+        <Property name="property">psid</Property>
+      </AutoFormElement>
+      <AutoFormElement>
         <Property name="name">valid</Property>
         <Property name="property">valid</Property>
+        <Property name="visible">false</Property>
+        <Property name="hideMode">display</Property>
       </AutoFormElement>
     </AutoForm>
+    <TabControl id="tabControl">
+      <Property name="tabPlacement">top</Property>
+      <Property name="showMenuButton">false</Property>
+      <Property name="height">0</Property>
+      <ControlTab id="flowing">
+        <Property name="caption">正在签批</Property>
+      </ControlTab>
+      <ControlTab id="finished">
+        <Property name="caption">签批完成</Property>
+      </ControlTab>
+    </TabControl>
     <DataGrid id="dataGridInvoicesPaying">
       <Property name="dataSet">dataSetInvoicesPaying</Property>
       <Property name="dataType">dataTypeInvoicesPaying</Property>
@@ -215,6 +245,7 @@
           <AutoFormElement>
             <Property name="name">deptid</Property>
             <Property name="property">deptid</Property>
+            <Property name="readOnly">true</Property>
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>
@@ -237,7 +268,9 @@
             <Property name="name">aorb</Property>
             <Property name="property">aorb</Property>
             <Editor>
-              <TextEditor id="text"/>
+              <TextEditor id="text">
+                <Property name="trigger">autoMappingDropDown1</Property>
+              </TextEditor>
             </Editor>
           </AutoFormElement>
           <AutoFormElement>
@@ -258,6 +291,7 @@
           <AutoFormElement>
             <Property name="name">keyinid</Property>
             <Property name="property">keyinid</Property>
+            <Property name="readOnly">true</Property>
             <Editor/>
           </AutoFormElement>
         </AutoForm>
