@@ -5,10 +5,13 @@ var loginuserdept = "${dorado.getDataProvider('el#Deptid').getResult()}";
 !function(self,arg){
 	if(loginuserdept == "00111" ){
 		view.get("#toolBarButtonSubmit").set("visible",true);
+		view.get("#toolBarButtonSubmitUp").set("visible",false);
 		view.get("#dataPilotInvoicesPaying").set("itemCodes","pageSize,pages");
-		view.get("#toolBarButtonEdit").set("visible",false);
+		view.get("#dataSetInvoicesPaying").set("readOnly",true);
+		view.get("#toolBarButtonEdit").set("visible",true);
 	}else{
 		view.get("#toolBarButtonSubmit").set("visible",false);
+		view.get("#toolBarButtonSubmitUp").set("visible",true);
 		view.get("#dataPilotInvoicesPaying").set("itemCodes","pageSize,pages,+,-");
 		view.get("#toolBarButtonEdit").set("visible",true);
 	}
@@ -56,10 +59,37 @@ var loginuserdept = "${dorado.getDataProvider('el#Deptid').getResult()}";
 	var bealn = view.get("#dataGridInvoicesPaying").get("selection").slice(0);
 	if(typeof(bealn) == "undefined"||bealn.length <= 0){
 		var entity = view.get("#dataGridInvoicesPaying").getCurrentEntity("entity");
-		flowfront(entity);
+		if(entity.get("psid")>0){
+			flowfront(entity);			
+		}else{
+			dorado.MessageBox.alert("单据需要先由水厂上报!");
+		}
 	}else{
 		view.get("#dataGridInvoicesPaying").get("selection").slice(0).each(function(entity){
-			flowfront(entity);
+			if(entity.get("psid")>0){
+				flowfront(entity);			
+			}
+		});
+	}
+	
+};
+
+/** @Bind #toolBarButtonSubmitUp.onClick */
+!function(self,arg){
+	debugger;
+	var bealn = view.get("#dataGridInvoicesPaying").get("selection").slice(0);
+	if(typeof(bealn) == "undefined"||bealn.length <= 0){
+		var entity = view.get("#dataGridInvoicesPaying").getCurrentEntity("entity");
+		if(entity.get("psid")==0){
+			flowfront(entity);			
+		}else{
+			dorado.MessageBox.alert("单据已上报!");
+		}
+	}else{
+		view.get("#dataGridInvoicesPaying").get("selection").slice(0).each(function(entity){
+			if(entity.get("psid")==0){
+				flowfront(entity);			
+			}
 		});
 	}
 	

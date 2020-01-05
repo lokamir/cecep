@@ -42,12 +42,14 @@ public class InvoicesPayingDao extends HibernateDao {
 		boolean categoryDetailIdcontains = false;
 		boolean contentcontains = false;
 		boolean validcontains = false;
+		boolean psidcontains = false;
 		String whereCase = " where 1 = 1 ";
 		IUser user = ContextHolder.getLoginUser();
 		if(user == null){
 			return;
 		}
 		List<IDept> IDepts = ContextHolder.getLoginUser().getDepts();
+		String arg = IDepts.get(0).getId();
 		boolean isadmin = ContextHolder.getLoginUser().isAdministrator();
 		if(param != null){
 			bcontains = param.containsKey("beginDate");
@@ -56,6 +58,7 @@ public class InvoicesPayingDao extends HibernateDao {
 			categoryDetailIdcontains = param.containsKey("categoryDetailId");
 			contentcontains = param.containsKey("content");
 			validcontains = param.containsKey("valid");
+			psidcontains = param.containsKey("psid");
 		}
 		if(bcontains && param.get("beginDate")!=null ){
 			Date beginDate = (Date)param.get("beginDate");
@@ -69,19 +72,23 @@ public class InvoicesPayingDao extends HibernateDao {
 			whereCase += " And DATE_FORMAT(Create_Date,'%Y-%m-%d') <= DATE_FORMAT('"
 					+ date + "' ,'%Y-%m-%d')";
 		}
-		if(deptidcontains && !param.get("deptid").toString().equals("")){
+		if(deptidcontains && !param.get("deptid").toString().equals("") 
+				&& !param.get("deptid").toString().equals("00111")&& !param.get("deptid").toString().equals("00112")){
 			whereCase += " And deptid = " + param.get("deptid");
 		}
 		if(validcontains && !param.get("valid").toString().equals("2")){
 			whereCase += " And VALID = " + param.get("valid");
 		}
-		if(categoryDetailIdcontains && !param.get("categoryDetailId").toString().equals("2")){
-			String sn = param.get("categoryDetailIdcontains").toString();
+		if(psidcontains && !param.get("psid").toString().equals("")){
+			whereCase += " And psid = " + param.get("psid");
+		}else if(arg.equals("00111")){
+			whereCase += " And psid != 0 " ;
+		}
+		if(categoryDetailIdcontains && !param.get("categoryDetailId").toString().equals("")){
 			/*if(isNumeric(sn)){
 				sn = subStrForMath(sn);
 			}*/
 			whereCase += " And categoryDetailId = " + param.get("categoryDetailId");
-			whereCase += " And sn like '%" + sn + "%'";
 		}
 		if(contentcontains && !param.get("content").toString().equals("")){
 			whereCase += " And content like '%" + param.get("content") + "%'";

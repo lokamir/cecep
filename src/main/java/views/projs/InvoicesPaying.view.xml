@@ -12,6 +12,11 @@
       </PropertyDef>
     </DataType>
     <DataType name="dataTypeformCondition">
+      <ClientEvent name="onDataChange">	var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+	with (view.get(&quot;#dataSetInvoicesPaying&quot;)) {&#xD;
+		set(&quot;parameter&quot;,data);&#xD;
+		flushAsync();&#xD;
+	}</ClientEvent>
       <PropertyDef name="beginDate">
         <Property name="label">开始日期</Property>
         <Property name="displayFormat">Y年m月d日</Property>
@@ -95,12 +100,17 @@
       </DataPilot>
       <Separator/>
       <ToolBarButton id="toolBarButtonEdit">
-        <Property name="caption">修改</Property>
+        <Property name="caption">明细</Property>
         <Property name="icon">url(>skin>common/icons.gif) -200px -0px</Property>
         <Property name="hideMode">display</Property>
       </ToolBarButton>
+      <ToolBarButton id="toolBarButtonSubmitUp">
+        <Property name="caption">上报</Property>
+        <Property name="icon">url(>skin>common/icons.gif) -140px -20px</Property>
+        <Property name="hideMode">display</Property>
+      </ToolBarButton>
       <ToolBarButton id="toolBarButtonSubmit">
-        <Property name="caption">提交</Property>
+        <Property name="caption">审核</Property>
         <Property name="icon">url(>skin>common/icons.gif) -140px -20px</Property>
         <Property name="hideMode">display</Property>
       </ToolBarButton>
@@ -251,6 +261,7 @@
           <AutoFormElement>
             <Property name="name">psid</Property>
             <Property name="property">psid</Property>
+            <Property name="readOnly">true</Property>
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>
