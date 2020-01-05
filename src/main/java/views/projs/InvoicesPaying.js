@@ -256,7 +256,7 @@ function flowfront(entity){
 	} 
 	dataSetInvoicesTransport.insert({
 		"keyinid":loginusername,
-		"endTime":"${util.getDate()}",
+		"endTime":new Date(),
 		"pid":pid,
 		"taskname":taskname
 		});

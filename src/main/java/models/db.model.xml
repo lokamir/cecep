@@ -594,7 +594,7 @@
       <Property name="defaultValue">${loginUser.getCname()}</Property>
     </PropertyDef>
     <PropertyDef name="addTime">
-      <Property name="dataType">Date</Property>
+      <Property name="dataType">DateTime</Property>
       <Property name="label">add_time</Property>
     </PropertyDef>
     <PropertyDef name="endTime">
