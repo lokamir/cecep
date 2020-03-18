@@ -614,4 +614,40 @@
       <Property name="label">流转环节</Property>
     </PropertyDef>
   </DataType>
+  <DataType name="dataTypeEquipment">
+    <Property name="creationType">entity.Equipment</Property>
+    <PropertyDef name="id">
+      <Property name="dataType">int</Property>
+      <Property name="label">id</Property>
+    </PropertyDef>
+    <PropertyDef name="name">
+      <Property></Property>
+      <Property name="label">设备名称</Property>
+    </PropertyDef>
+    <PropertyDef name="rtime">
+      <Property name="dataType">Date</Property>
+      <Property name="label">维修时间</Property>
+      <Property name="defaultValue">${util.getToday()}</Property>
+    </PropertyDef>
+    <PropertyDef name="rereason">
+      <Property></Property>
+      <Property name="label">故障原因</Property>
+    </PropertyDef>
+    <PropertyDef name="redetail">
+      <Property></Property>
+      <Property name="label">维修详情</Property>
+    </PropertyDef>
+    <PropertyDef name="memo">
+      <Property></Property>
+      <Property name="label">备注</Property>
+    </PropertyDef>
+    <PropertyDef name="deptid">
+      <Property></Property>
+      <Property name="label">污水厂名称</Property>
+      <Property name="defaultValue">${dorado.getDataProvider(&quot;el#Deptid&quot;).getResult()}</Property>
+      <Property name="mapping">
+        <Property name="mapValues">${dorado.getDataProvider(&quot;el#mapBdf2Depts&quot;).getResult()}</Property>
+      </Property>
+    </PropertyDef>
+  </DataType>
 </Model>

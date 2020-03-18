@@ -15,17 +15,17 @@ import com.bstek.dorado.data.entity.EntityState;
 import com.bstek.dorado.data.entity.EntityUtils;
 import com.bstek.dorado.data.provider.Page;
 
-import entity.Operated;
+import entity.Equipment;
 @Component
-public class OperatedDao extends HibernateDao {
+public class EquipmentDao extends HibernateDao {
 	@DataProvider
-	public Collection<Operated> loadbiscompany() throws Exception {
-			String hql="from " + Operated.class.getName();
+	public Collection<Equipment> loadbiscompany() throws Exception {
+			String hql="from " + Equipment.class.getName();
 			return this.query(hql);
 	}
 	
 	@DataProvider
-	public void queryPage(Page<Operated> page,Map<String, Object> param) throws Exception{
+	public void queryPage(Page<Equipment> page,Map<String, Object> param) throws Exception{
 		boolean bcontains = false;
 		boolean econtains = false;
 		boolean deptidcontains = false;
@@ -50,25 +50,25 @@ public class OperatedDao extends HibernateDao {
 		if(deptidcontains && !param.get("deptid").toString().equals("")){
 			whereCase += " And deptid = " + param.get("deptid");
 		}
-		String sql = " from " + Operated.class.getName() + whereCase + " order by date desc ";
+		String sql = " from " + Equipment.class.getName() + whereCase + " order by rtime desc ";
 		this.pagingQuery(page, sql , "select count(*) "+sql);
 		
 	}
 	
 	@DataResolver
-	public void saveOperated(Collection<Operated> operateds) throws Exception {
+	public void saveEquipment(Collection<Equipment> equipments) throws Exception {
 		Session session = this.getSessionFactory().openSession();
 		try{
-			for(Operated operated : operateds){
-				EntityState state = EntityUtils.getState(operated);
+			for(Equipment equipment : equipments){
+				EntityState state = EntityUtils.getState(equipment);
 				if(state.equals(EntityState.NEW)){
-					session.save(operated);
+					session.save(equipment);
 				}
 				if(state.equals(EntityState.MODIFIED)){
-					session.update(operated);
+					session.update(equipment);
 				}
 				if(state.equals(EntityState.DELETED)){
-					session.delete(operated);
+					session.delete(equipment);
 				}
 			}
 		

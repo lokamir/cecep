@@ -48,7 +48,7 @@ public void queryPage(Page<AnalysisSludge> page,Map<String, Object> param) throw
 			//System.out.println("beginDate");
 			Date beginDate = (Date) param.get("beginDate");
 			if (beginDate != null) {
-				String date =new SimpleDateFormat("YYYY-MM-dd").format(beginDate);
+				String date =new SimpleDateFormat("yyyy-MM-dd").format(beginDate);
 				whereCase += " And DATE_FORMAT(Date,'%Y-%m-%d') >= DATE_FORMAT('"
 						+ date + "' ,'%Y-%m-%d')";
 			}	
@@ -57,7 +57,7 @@ public void queryPage(Page<AnalysisSludge> page,Map<String, Object> param) throw
 			//System.out.println("endDate");
 			Date endDate = (Date) param.get("endDate");
 			if (endDate != null) {
-				String date =new SimpleDateFormat("YYYY-MM-dd").format(endDate);
+				String date =new SimpleDateFormat("yyyy-MM-dd").format(endDate);
 				whereCase += " And DATE_FORMAT(Date,'%Y-%m-%d') <= DATE_FORMAT('"
 						+ date + "' ,'%Y-%m-%d')";
 			}

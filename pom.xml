@@ -112,6 +112,12 @@
   				</exclusion>
   			</exclusions>
 		</dependency>
+		<!-- dorado-touch -->
+		<dependency>
+ 		 	<groupId>com.bstek.dorado</groupId>
+  			<artifactId>dorado-touch</artifactId>
+  			<version>1.0.3-SNAPSHOT</version>
+		</dependency>
 		<!-- 为了解决servlet-api.jar冲突 -->
 		
 		<dependency>
