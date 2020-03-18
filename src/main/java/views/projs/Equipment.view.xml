@@ -39,7 +39,6 @@
   </Model>
   <View>
     <Property name="title">设备维护台账</Property>
-    <Property name="packages">assets</Property>
     <DataSet id="dataSetEquipment">
       <Property name="dataProvider">equipmentDao#queryPage</Property>
       <Property name="pageSize">30</Property>

@@ -38,13 +38,13 @@ public class EquipmentDao extends HibernateDao {
 		if(bcontains && !param.get("beginDate").toString().equals("") ){
 			Date beginDate = (Date)param.get("beginDate");
 			String date =new SimpleDateFormat("yyyy-MM-dd").format(beginDate);
-			whereCase += " And DATE_FORMAT(Date,'%Y-%m-%d') >= DATE_FORMAT('"
+			whereCase += " And DATE_FORMAT(rtime,'%Y-%m-%d') >= DATE_FORMAT('"
 					+ date + "' ,'%Y-%m-%d')";
 		}
 		if(econtains && !param.get("endDate").toString().equals("") ){
 			Date endDate = (Date)param.get("endDate");
 			String date =new SimpleDateFormat("yyyy-MM-dd").format(endDate);
-			whereCase += " And DATE_FORMAT(Date,'%Y-%m-%d') <= DATE_FORMAT('"
+			whereCase += " And DATE_FORMAT(rtime,'%Y-%m-%d') <= DATE_FORMAT('"
 					+ date + "' ,'%Y-%m-%d')";
 		}
 		if(deptidcontains && !param.get("deptid").toString().equals("")){
