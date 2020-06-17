@@ -392,6 +392,10 @@
       <Property name="label">valid</Property>
       <Property name="defaultValue">true</Property>
     </PropertyDef>
+    <PropertyDef name="waratio">
+      <Property name="dataType">BigDecimal</Property>
+      <Property name="label">污泥含水率</Property>
+    </PropertyDef>
   </DataType>
   <DataType name="dataTypeProcess">
     <Property name="creationType">entity.Process</Property>

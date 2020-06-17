@@ -63,9 +63,22 @@ var d = param.get(&quot;date&quot;);&#xD;
 var date = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()  ;&#xD;
 var subViewHolderExport = view.get(&quot;#subViewHolderExport&quot;);&#xD;
 //subViewHolderExport.set(&quot;path&quot;,&quot;./Export_Daily.jsp?deptid=&quot;+deptid+&quot;&amp;date=&quot;+date);&#xD;
-subViewHolderExport.set(&quot;path&quot;,&quot;./ureport/preview?_t=1,6&amp;_u=file:Daily.ureport.xml&amp;deptid=&quot;+deptid+&quot;&amp;date=&quot;+date);&#xD;
+var filename = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日' +'惠山水务洛社污水厂运营日志.xlsx';&#xD;
+subViewHolderExport.set(&quot;path&quot;,&quot;./ureport/preview?_t=1,6&amp;_n=&quot;+filename+&quot;&amp;_u=file:Daily.ureport.xml&amp;deptid=&quot;+deptid+&quot;&amp;date=&quot;+date);&#xD;
 </ClientEvent>
-        <Property name="caption">预览</Property>
+        <Property name="caption">生成水务公司报表</Property>
+      </Button>
+      <Button>
+        <ClientEvent name="onClick">var param = view.get(&quot;#formCondition.entity&quot;);&#xD;
+var deptid = param.get(&quot;deptid&quot;);&#xD;
+var d = param.get(&quot;date&quot;);&#xD;
+var date = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()  ;&#xD;
+var subViewHolderExport = view.get(&quot;#subViewHolderExport&quot;);&#xD;
+//subViewHolderExport.set(&quot;path&quot;,&quot;./Export_Daily.jsp?deptid=&quot;+deptid+&quot;&amp;date=&quot;+date);&#xD;
+var filename = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日' +'惠山水务洛社污水厂运营日报表 T1-01.xlsx';&#xD;
+subViewHolderExport.set(&quot;path&quot;,&quot;./ureport/preview?_t=1,6&amp;_n=&quot;+filename+&quot;&amp;_u=file:Daily-T1-01.ureport.xml&amp;deptid=&quot;+deptid+&quot;&amp;date=&quot;+date);&#xD;
+</ClientEvent>
+        <Property name="caption">生成住建厅日报表</Property>
       </Button>
       <Button>
         <ClientEvent name="onClick">var param = view.get(&quot;#formCondition.entity&quot;);&#xD;

@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import com.bstek.dorado.annotation.PropertyDef;
@@ -206,6 +207,12 @@ public class Operated implements Serializable {
 	 */
 	@PropertyDef(label = "valid", description = "valid:")
 	private boolean valid;
+	
+	/**
+	 * waratio:污泥含水率
+	 */
+@PropertyDef(label="waratio",description="waratio:")
+	private BigDecimal waratio;
 
 	public Operated() {
 		super();
@@ -222,7 +229,7 @@ public class Operated implements Serializable {
 			BigDecimal resdpower, BigDecimal sludge, Date date, String deptid,
 			String by1, String by2, String memo, String keyinid, Date addTime,
 			//Date lastTime, 
-			boolean valid) {
+			boolean valid,BigDecimal waratio) {
 		super();
 		this.id = id;
 		this.intrflux = intrflux;
@@ -256,6 +263,7 @@ public class Operated implements Serializable {
 		this.addTime = addTime;
 		//this.lastTime = lastTime;
 		this.valid = valid;
+		this.waratio=waratio;
 	}
 
 	public void setId(int id) {
@@ -550,6 +558,15 @@ public class Operated implements Serializable {
 	public boolean isValid() {
 		return valid;
 	}
+	
+	public void setWaratio(BigDecimal waratio) {
+		this.waratio = waratio;
+	}
+
+	@Column(name="waratio")
+	public BigDecimal getWaratio() {
+		return waratio;
+	}
 
 	public String toString() {
 		return "Operated [id=" + id + ",intrflux=" + intrflux + ",extflux="
@@ -565,7 +582,7 @@ public class Operated implements Serializable {
 				+ power + ",inapower=" + inapower + ",resdpower=" + resdpower
 				+ ",sludge=" + sludge + ",date=" + date + ",deptid=" + deptid
 				+ ",by1=" + by1 + ",by2=" + by2 + ",memo=" + memo + ",keyinid="
-				+ keyinid + ",addTime=" + addTime 
+				+ keyinid + ",addTime=" + addTime + ",waratio=" + waratio
 				//+ ",lastTime=" + lastTime
 				+ ",valid=" + valid + "]";
 	}

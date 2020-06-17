@@ -336,9 +336,16 @@ dorado.MessageBox.confirm(&quot;您真的要取消当前操作吗？&quot;,funct
             <Editor/>
           </AutoFormElement>
           <AutoFormElement>
+            <Property name="name">waratio</Property>
+            <Property name="property">waratio</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
             <Property name="name">memo</Property>
             <Property name="property">memo</Property>
-            <Editor/>
+            <Editor>
+              <TextArea layoutConstraint="colSpan:3"/>
+            </Editor>
           </AutoFormElement>
           <AutoFormElement>
             <Property name="name">keyinid</Property>
